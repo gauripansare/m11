@@ -42,7 +42,7 @@ var _Navigator = (function () {
             hasActivity: true,
             hashint: true
         },
-        
+
         "p3": {
             pageId: "p3",
             prevPageId: "p2",
@@ -243,14 +243,14 @@ var _Navigator = (function () {
             hasActivity: true,
         },
 
-         "p26":{
+        "p26": {
             pageId: "p26",
             prevPageId: "p25",
             nextPageId: "",
             dataurl: "p26.htm",
             hasActivity: true,
-            isLastPage:true,
-            isAssessment:true,
+            isLastPage: true,
+            isAssessment: true,
             hideHint: true
         }
     }
@@ -268,7 +268,7 @@ var _Navigator = (function () {
             $("#header-title").addClass("startpage");
         }
         _ModuleCommon.OnPageLoad();
-        if(presentermode){
+        if (presentermode) {
             $("#linknext").k_enable();
             $(".start-btn").k_disable();
         }
@@ -277,12 +277,14 @@ var _Navigator = (function () {
         Get: function () {
             return _NData;
         },
+
         Start: function () {
             this.LoadPage("p1");
-            if(presentermode){
+            if (presentermode) {
                 _ModuleCommon.AppendFooter();
             }
         },
+
         LoadPage: function (pageId, jsonObj) {
             console.log(pageId)
             if (jsonObj == undefined) {
@@ -318,14 +320,13 @@ var _Navigator = (function () {
             if (_currentPageObject.pageId == "p2") { // temporary fix
                 $("#progressdiv").css("margin-left", "-20px")
             }
-            else
-            {
+            else {
                 $("#progressdiv").css("margin-left", "-15px")
             }
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
-                    OnPageLoad();                   
-                    setReader("header1");    
+                    OnPageLoad();
+                    setReader("header1");
 
                 });
             } else {
@@ -333,14 +334,13 @@ var _Navigator = (function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad();
-                        if(_currentPageId=="p26")//  change to assessment id
+                        if (_currentPageId == "p26")//  change to assessment id
                         {
                             showQuestion();
                         }
-                        if(_currentPageObject.pageId == "p2")
+                        if (_currentPageObject.pageId == "p2")
                             setReader("titleheader");
-                        else
-                        {
+                        else {
                             //if($("body").hasClass("no-focus"))
                             {
                                 setReader("titleheader");
@@ -351,29 +351,25 @@ var _Navigator = (function () {
                             // }
                         }
                         //$("#hintdiv").show();
-                        if(_currentPageObject.hideHint !=undefined && _currentPageObject.hideHint)
-                        {
+                        if (_currentPageObject.hideHint != undefined && _currentPageObject.hideHint) {
                             $("#hintlink").k_disable();
                             $(".hintdiv").hide();
                         }
-                            if(presentermode)
-                            {
-                                _ModuleCommon.PresenterMode();
-                            }
-                        if( _currentPageObject.hinturl !=undefined || _currentPageObject.hashint)
-                        {
+                        if (presentermode) {
+                            _ModuleCommon.PresenterMode();
+                        }
+                        if (_currentPageObject.hinturl != undefined || _currentPageObject.hashint) {
                             $("div#hintdiv").show();
                             //$(".hintlink").show();
-                            $("div#hintdiv").css("margin-left","auto");
+                            $("div#hintdiv").css("margin-left", "auto");
                             $(".hintlink").k_enable();
                             $(".hintcontent").load("pagedata/hintdata/" + _currentPageObject.hinturl, function () { });
                         }
-                        else
-                        {
+                        else {
                             //$(".hintlink").hide();
                             $("div#hintdiv").hide();
                         }
-                        if(_Navigator.GetCurrentPage().hideHint != undefined && _Navigator.GetCurrentPage().hideHint){
+                        if (_Navigator.GetCurrentPage().hideHint != undefined && _Navigator.GetCurrentPage().hideHint) {
                             //$(".hintlink").hide();
                             $("div#hintdiv").hide();
                         }
@@ -399,16 +395,16 @@ var _Navigator = (function () {
             }
         },
         Prev: function () {
-            if ( _currentPageObject.pageId == "p26" && typeof(currentQuestionIndex) !='undefined'  &&  currentQuestionIndex > 0   ) {
-				$("#ReviewIns").hide();
+            if (_currentPageObject.pageId == "p26" && typeof (currentQuestionIndex) != 'undefined' && currentQuestionIndex > 0) {
+                $("#ReviewIns").hide();
                 $(".intro-content-question").show();
                 $("#Questioninfo").show();
-                currentQuestionIndex  = currentQuestionIndex - 1;
+                currentQuestionIndex = currentQuestionIndex - 1;
                 $("#Summary").empty();
                 $("#Summary").hide();
-				showQuestion();				
+                showQuestion();
             }
-            else{
+            else {
                 this.LoadPage(_currentPageObject.prevPageId);
             }
 
@@ -419,43 +415,41 @@ var _Navigator = (function () {
                 var custFunction = new Function(_currentPageObject.customNext.jsFunction);
                 custFunction();
             }
-            if ( _currentPageObject.pageId == "p26")
-            {  
-             if ( typeof(currentQuestionIndex) !='undefined' && typeof(gRecordData.Questions) !='undefined'  && (currentQuestionIndex +1) < gRecordData.Questions.length ) {
-                    currentQuestionIndex  = currentQuestionIndex + 1
+            if (_currentPageObject.pageId == "p26") {
+                if (typeof (currentQuestionIndex) != 'undefined' && typeof (gRecordData.Questions) != 'undefined' && (currentQuestionIndex + 1) < gRecordData.Questions.length) {
+                    currentQuestionIndex = currentQuestionIndex + 1
                     $("#Questioninfo").show();
                     showQuestion()
-                    
+
                     //this.UpdateProgressBar();
-                    if(gRecordData.Status !="Completed" && !presentermode)
-                    {
-                        $("#linknext").k_disable();    
+                    if (gRecordData.Status != "Completed" && !presentermode) {
+                        $("#linknext").k_disable();
                         $("#linkprevious").k_disable();
                     }
                 }
-              else  if ( typeof(currentQuestionIndex) !='undefined' && typeof(gRecordData.Questions) !='undefined'  && (currentQuestionIndex +1) == gRecordData.Questions.length ) {
+                else if (typeof (currentQuestionIndex) != 'undefined' && typeof (gRecordData.Questions) != 'undefined' && (currentQuestionIndex + 1) == gRecordData.Questions.length) {
                     //this.UpdateProgressBar();
                     // Show review instruction
-                    
-                        $(".intro-content-question").hide();
-                        $(".questionwrapper").hide();
-                        currentQuestionIndex  = currentQuestionIndex + 1;
-                        $("#Summary").show();
-                        $("#Questioninfo").hide();
-				        $("#Summary").load("pagedata/Summary.htm",function(){
-                            showSummary()                           
-                            $("#linkprevious").k_enable();
-                            $("#Summary").find("input[type='radio']").attr("readonly","readonly");
-                            $(".question-band").find("img").attr("aria-hidden","true");
-                        })
-                        $("#climate-deal").css("margin-left","23%");
-                        $("#linknext").k_disable();
-                        //$(".inputcircle").k_disable();
-                        
 
-                }                
-          
-			}
+                    $(".intro-content-question").hide();
+                    $(".questionwrapper").hide();
+                    currentQuestionIndex = currentQuestionIndex + 1;
+                    $("#Summary").show();
+                    $("#Questioninfo").hide();
+                    $("#Summary").load("pagedata/Summary.htm", function () {
+                        showSummary()
+                        $("#linkprevious").k_enable();
+                        $("#Summary").find("input[type='radio']").attr("readonly", "readonly");
+                        $(".question-band").find("img").attr("aria-hidden", "true");
+                    })
+                    $("#climate-deal").css("margin-left", "23%");
+                    $("#linknext").k_disable();
+                    //$(".inputcircle").k_disable();
+
+
+                }
+
+            }
             else {
 
                 this.LoadPage(_currentPageObject.nextPageId);
@@ -468,14 +462,14 @@ var _Navigator = (function () {
                     visitpage++;
                 }
             }
-            visitpage += this.GetAnswerCount() ;
+            visitpage += this.GetAnswerCount();
             return visitpage;
         },
-        GetAnswerCount:function(){
-          var cnt =  (gRecordData.Questions.filter(function (item) {
+        GetAnswerCount: function () {
+            var cnt = (gRecordData.Questions.filter(function (item) {
                 return item.IsAnswered;
-            }).length  ) 
-            cnt+= gRecordData.Status == "Completed" ? 1:0;
+            }).length)
+            cnt += gRecordData.Status == "Completed" ? 1 : 0;
             return cnt;
         },
         UpdateProgressBar: function () {
@@ -535,34 +529,31 @@ var _Navigator = (function () {
             return false;
 
         },
-        CheckIfPageLoaded:function(pageid){
-            return _NData[pageid].isLoaded !=undefined && _NData[pageid].isLoaded ? true : false;
+        CheckIfPageLoaded: function (pageid) {
+            return _NData[pageid].isLoaded != undefined && _NData[pageid].isLoaded ? true : false;
         },
-        SetPresenterMode:function(val){
+        SetPresenterMode: function (val) {
             presentermode = val;
         },
-        IsPresenterMode:function(){
+        IsPresenterMode: function () {
             return presentermode;
         },
-        SetNextPageId :function(nextpageid){
-            if(nextpageid == "p12")
-            {
-                _NData[_currentPageObject.nextPageId].prevPageId="p13";
-                progressLevels[0] = progressLevels[0]+2;//increase num of pages by 1 
+        SetNextPageId: function (nextpageid) {
+            if (nextpageid == "p12") {
+                _NData[_currentPageObject.nextPageId].prevPageId = "p13";
+                progressLevels[0] = progressLevels[0] + 2;//increase num of pages by 1 
             }
-            else if(nextpageid == "p2m1")
-            {
-                _NData[_currentPageObject.nextPageId].prevPageId="p2m2";
-                progressLevels[0] = progressLevels[0]+2;//increase num of pages by 1 
+            else if (nextpageid == "p2m1") {
+                _NData[_currentPageObject.nextPageId].prevPageId = "p2m2";
+                progressLevels[0] = progressLevels[0] + 2;//increase num of pages by 1 
             }
-            else
-            {
-                _NData[_currentPageObject.nextPageId].prevPageId=nextpageid;
-                progressLevels[0] = progressLevels[0]+1;//increase num of pages by 1 
+            else {
+                _NData[_currentPageObject.nextPageId].prevPageId = nextpageid;
+                progressLevels[0] = progressLevels[0] + 1;//increase num of pages by 1 
             }
             _NData[_currentPageId].nextPageId = nextpageid;
-           
-           
+
+
         }
     };
 })();
@@ -576,27 +567,27 @@ function setReader(idToStartReading) {
 
 
 function removeCSS(cssFileToRemove) {
-	for(var w=0; w < document.styleSheets.length; w++ ){
-		if(document.styleSheets[w].href.indexOf(cssFileToRemove) != -1 ) {
-			document.styleSheets[w].disabled = true;
-		}
-	}
+    for (var w = 0; w < document.styleSheets.length; w++) {
+        if (document.styleSheets[w].href.indexOf(cssFileToRemove) != -1) {
+            document.styleSheets[w].disabled = true;
+        }
+    }
 }
 function addCSS(cssFileToAdd) {
-	var isCSSAlreadyAdded = false;
-	for(var w=0; w < document.styleSheets.length; w++ ){
-		if(document.styleSheets[w].href.indexOf(cssFileToAdd) != -1 ) {
-			isCSSAlreadyAdded = false;
-		}
-	}
-	console.log(isCSSAlreadyAdded + " --")
-	if(! isCSSAlreadyAdded){
-		var newlink = document.createElement("link");
-		newlink.setAttribute("rel", "stylesheet");
-		newlink.setAttribute("type", "text/css");
-		newlink.setAttribute("href", cssFileToAdd);
-		document.getElementsByTagName("head").item(0).appendChild(newlink);
-	}
+    var isCSSAlreadyAdded = false;
+    for (var w = 0; w < document.styleSheets.length; w++) {
+        if (document.styleSheets[w].href.indexOf(cssFileToAdd) != -1) {
+            isCSSAlreadyAdded = false;
+        }
+    }
+    console.log(isCSSAlreadyAdded + " --")
+    if (!isCSSAlreadyAdded) {
+        var newlink = document.createElement("link");
+        newlink.setAttribute("rel", "stylesheet");
+        newlink.setAttribute("type", "text/css");
+        newlink.setAttribute("href", cssFileToAdd);
+        document.getElementsByTagName("head").item(0).appendChild(newlink);
+    }
 }
 
 function changeCSS(cssFile, cssLinkIndex) {

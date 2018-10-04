@@ -1,15 +1,17 @@
 ﻿@media screen and (min-width: 320px){
-#header-title {
-    min-height: 0px;
-}
-.question-band.summaryoptions {
-    margin-left: 9% !important;
-}
+    #header-title {
+        min-height: 0px;
+    }
+    .question-band.summaryoptions {
+        margin-left: 9% !important;
+    }
 }
 @media screen and (max-width : 1024px) {
+
 }
 
 @media screen and (max-width:940px) {
+
 }
 
 @media screen and (max-width: 912px) {
@@ -101,13 +103,13 @@
         font-size: 20px;
     }
 
-        h2 {
-            font-size: 18px;
-        }
+    h2 {
+        font-size: 18px;
+    }
 
-        .header-informarion p, .header-informarion div, .header-informarion span, .closehintlink {
-            font-size: 13px;
-        }
+    .header-informarion p, .header-informarion div, .header-informarion span, .closehintlink {
+        font-size: 13px;
+    }
 
     #footer-navigation .previous, #footer-navigation .next {
         /*margin-top: 2%;
@@ -160,7 +162,6 @@
 
     #header-title:not(.startpage) img {
         /*display: none;*/
-      
     }
 
     .statpageheadmargin {
@@ -228,6 +229,7 @@
 }
 /* Smartphones (portrait and landscape) ----------- */
 @media screen and (max-width : 440px) {
+    
 }
 
 @media screen and (max-width : 420px) {

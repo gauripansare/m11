@@ -22,7 +22,8 @@ var _Navigator = (function () {
             dataurl: "p2.htm",
             hinturl: "hintp2.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player",
         },
         "p2m1": {
             pageId: "p2m1",
@@ -31,7 +32,8 @@ var _Navigator = (function () {
             dataurl: "p2m1.htm",
             hinturl: "hintp2m1.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player Organize Context menu open",
         },
         "p2m2": {
             pageId: "p2m2",
@@ -40,7 +42,8 @@ var _Navigator = (function () {
             dataurl: "p2m2.htm",
             hinturl: "hintp2m2.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player Organize menu submenu Sort by open",
         },
 
         "p3": {
@@ -57,8 +60,9 @@ var _Navigator = (function () {
             dataurl: "p4.htm",
             hinturl: "hintp4.htm",
             hasActivity: true,
-            hashint: true
-        },
+            hashint: true,
+            accessText: "Windows Media Player",
+       },
         "p5": {//optional
             pageId: "p5",
             prevPageId: "p4",
@@ -66,7 +70,8 @@ var _Navigator = (function () {
             dataurl: "p5.htm",
             hinturl: "hintp5.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player Music Context menu open",
         },
         "p6": {
             pageId: "p6",
@@ -75,7 +80,8 @@ var _Navigator = (function () {
             dataurl: "p6.htm",
             hinturl: "hintp6.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player",
         },
         "p7": {
             pageId: "p7",
@@ -91,7 +97,8 @@ var _Navigator = (function () {
             dataurl: "p8.htm",
             hinturl: "hintp8.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player Music Context menu open",
         },
         "p9": {//optional
             pageId: "p9",
@@ -100,7 +107,8 @@ var _Navigator = (function () {
             dataurl: "p9.htm",
             hinturl: "hintp9.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player Genre Context menu open",
         },
         "p10": {
             pageId: "p10",
@@ -109,7 +117,8 @@ var _Navigator = (function () {
             dataurl: "p10.htm",
             hinturl: "hintp10.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player",
         },
         "p11": {
             pageId: "p11",
@@ -118,7 +127,8 @@ var _Navigator = (function () {
             dataurl: "p11.htm",
             hinturl: "hintp11.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player",
         },
         "p12": {//optional
             pageId: "p12",
@@ -127,7 +137,8 @@ var _Navigator = (function () {
             dataurl: "p12.htm",
             hinturl: "hintp12.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player Organize Context menu open",
         },
         "p13": {//optional
             pageId: "p13",
@@ -136,7 +147,8 @@ var _Navigator = (function () {
             dataurl: "p13.htm",
             hinturl: "hintp13.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player Organize menu submenu Sort by open",
         },
         "p14": {
             pageId: "p14",
@@ -152,7 +164,8 @@ var _Navigator = (function () {
             dataurl: "p15.htm",
             hinturl: "hintp15.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player",
         },
         "p16": {
             pageId: "p16",
@@ -161,7 +174,8 @@ var _Navigator = (function () {
             dataurl: "p16.htm",
             hinturl: "hintp16.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "Windows Media Player Create playlist menu open",
         },
         "p17": {
             pageId: "p17",
@@ -170,7 +184,8 @@ var _Navigator = (function () {
             dataurl: "p17.htm",
             hinturl: "hintp17.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "New Auto Playlist dialogue window open",
         },
         "p18": {
             pageId: "p18",
@@ -179,7 +194,8 @@ var _Navigator = (function () {
             dataurl: "p18.htm",
             hinturl: "hintp18.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "New Auto Playlist dialogue window open",
         },
         "p19": {
             pageId: "p19",
@@ -188,7 +204,8 @@ var _Navigator = (function () {
             dataurl: "p19.htm",
             hinturl: "hintp19.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "New Auto Playlist dialogue window Music in my library combobox open",
         },
         "p20": {
             pageId: "p20",
@@ -197,7 +214,8 @@ var _Navigator = (function () {
             dataurl: "p20.htm",
             hinturl: "hintp20.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "New Auto Playlist dialogue window open",
         },
         "p21": {
             pageId: "p21",
@@ -206,7 +224,8 @@ var _Navigator = (function () {
             dataurl: "p21.htm",
             hinturl: "hintp21.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "New Auto Playlist dialogue window  Criteria Genre combo box open",
         },
         "p22": {
             pageId: "p22",
@@ -215,7 +234,8 @@ var _Navigator = (function () {
             dataurl: "p22.htm",
             hinturl: "hintp22.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "New Auto Playlist dialogue window open",
         },
         "p23": {
             pageId: "p23",
@@ -224,7 +244,8 @@ var _Navigator = (function () {
             dataurl: "p23.htm",
             hinturl: "hintp23.htm",
             hasActivity: true,
-            hashint: true
+            hashint: true,
+            accessText: "New Auto Playlist dialogue window  Criteria Genre combo box open",
         },
         "p24": {
             pageId: "p24",
@@ -233,7 +254,8 @@ var _Navigator = (function () {
             dataurl: "p24.htm",
             hasActivity: true,
             hinturl: "hintp24.htm",
-            hashint: true
+            hashint: true,
+            accessText: "New Auto Playlist dialogue window open",
         },
         "p25": {
             pageId: "p25",
@@ -266,6 +288,9 @@ var _Navigator = (function () {
         if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
             $("#header-title h1").hide()
             $("#header-title").addClass("startpage");
+        }
+        if (_currentPageObject.accessText != undefined) {
+            $(".activityimg").attr("alt", _currentPageObject.accessText);
         }
         _ModuleCommon.OnPageLoad();
         if (presentermode) {

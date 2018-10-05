@@ -30,6 +30,7 @@ var _PData = {
           "leftPX": "115.5px",
           action: "feedback",
           presenter: true,
+          accessText: "Album artist",
         },
         {
           "HotspotId": 2,
@@ -42,7 +43,8 @@ var _PData = {
           "topPX": "45px",
           "leftPX": "-0.5px",
           action: "next",
-          nextPageId: "p2m1"
+          nextPageId: "p2m1",
+          accessText: "organize",
         }
       ],
       correctfeedback: "feedbackdata/feedbackp2c.htm",
@@ -63,6 +65,7 @@ var _PData = {
           "topPX": "106px",
           "leftPX": "22.5px",
           action: "next",
+          accessText: "Sort by",
         }
       ]
     }
@@ -82,6 +85,7 @@ var _PData = {
           "topPX": "126px",
           "leftPX": "228.5px",
           action: "feedback",
+          accessText: "Album artist",
         }
       ],
       correctfeedback: "feedbackdata/feedbackp2c.htm",
@@ -103,6 +107,7 @@ var _PData = {
           "leftPX": "21.5px",
           action: "next",
           presenter: true,
+          accessText: "Genre",
         },
         {
           "HotspotId": 2,
@@ -115,7 +120,8 @@ var _PData = {
           "topPX": "14px",
           "leftPX": "107.5px",
           action: "next",
-          nextPageId: "p5"
+          nextPageId: "p5",
+          accessText: "Music",
         }
       ],
     }
@@ -134,7 +140,8 @@ var _PData = {
           "heightPX": "29px",
           "topPX": "89px",
           "leftPX": "171.5px",
-          action: "next"
+          action: "next",
+          accessText: "Genre",
         }
       ],
     },
@@ -153,7 +160,8 @@ var _PData = {
           "heightPX": "87px",
           "topPX": "106px",
           "leftPX": "126.5px",
-          correct: false
+          correct: false,
+          accessText: "Beats",
         },
         {
           "HotspotId": 2,
@@ -165,7 +173,8 @@ var _PData = {
           "heightPX": "107px",
           "topPX": "103px",
           "leftPX": "376.5px",
-          correct: false
+          correct: false,
+          accessText: "Blues",
         },
         {
           "HotspotId": 3,
@@ -177,7 +186,8 @@ var _PData = {
           "heightPX": "102px",
           "topPX": "211px",
           "leftPX": "119.5px",
-          correct: false
+          correct: false,
+          accessText: "chiptue",
         },
         {
           "HotspotId": 4,
@@ -189,7 +199,8 @@ var _PData = {
           "heightPX": "89px",
           "topPX": "215px",
           "leftPX": "384.5px",
-          correct: false
+          correct: false,
+          accessText: "Classic",
         },
         {
           "HotspotId": 5,
@@ -201,7 +212,8 @@ var _PData = {
           "heightPX": "90px",
           "topPX": "312.96875px",
           "leftPX": "120.5px",
-          correct: false
+          correct: false,
+          accessText: "Club Music",
         },
         {
           "HotspotId": 6,
@@ -213,7 +225,8 @@ var _PData = {
           "heightPX": "92px",
           "topPX": "308px",
           "leftPX": "385.5px",
-          correct: false
+          correct: false,
+          accessText: "Comedy",
         },
         {
           "HotspotId": 7,
@@ -227,7 +240,8 @@ var _PData = {
           "leftPX": "121.5px",
           action: "feedback",
           eventName: "dblclick",
-          correct: true
+          correct: true,
+          accessText: "Country",
         }
       ],
       correctfeedback: "feedbackdata/feedbackp6c.htm",
@@ -248,7 +262,8 @@ var _PData = {
           "topPX": "17px",
           "leftPX": "149.5px",
           action: "next",
-          nextPageId: "p9"
+          nextPageId: "p9",
+          accessText: "Genre",
         },
         {
           "HotspotId": 2,
@@ -262,6 +277,7 @@ var _PData = {
           "leftPX": "22.5px",
           action: "next",
           presenter: true,
+          accessText: "Genre",
         }
       ],
     }
@@ -280,7 +296,8 @@ var _PData = {
           "heightPX": "25px",
           "topPX": "72px",
           "leftPX": "211.5px",
-          action: "next"
+          action: "next",
+          accessText: "Pop",
 
         }
       ],
@@ -300,7 +317,8 @@ var _PData = {
           "heightPX": "104px",
           "topPX": "103px",
           "leftPX": "125.5px",
-          correct: false
+          correct: false,
+          accessText: "Podcast",
         },
         {
           "HotspotId": 2,
@@ -314,7 +332,8 @@ var _PData = {
           "leftPX": "362.5px",
           action: "next",
           eventName: "dblclick",
-          correct: true
+          correct: true,
+          accessText: "Pop",
         },
         {
           "HotspotId": 3,
@@ -326,7 +345,8 @@ var _PData = {
           "heightPX": "84px",
           "topPX": "214px",
           "leftPX": "120.5px",
-          correct: false
+          correct: false,
+          accessText: "R&B/Soul",
         },
         {
           "HotspotId": 4,
@@ -338,7 +358,8 @@ var _PData = {
           "heightPX": "100px",
           "topPX": "211px",
           "leftPX": "360.5px",
-          correct: false
+          correct: false,
+          accessText: "Rap & Hip-Hop",
         },
         {
           "HotspotId": 5,
@@ -350,7 +371,8 @@ var _PData = {
           "heightPX": "99px",
           "topPX": "303px",
           "leftPX": "111.5px",
-          correct: false
+          correct: false,
+          accessText: "Religion",
         },
         {
           "HotspotId": 6,
@@ -362,7 +384,8 @@ var _PData = {
           "heightPX": "98px",
           "topPX": "311px",
           "leftPX": "359.5px",
-          correct: false
+          correct: false,
+          accessText: "Rock",
         },
         {
           "HotspotId": 7,
@@ -374,7 +397,8 @@ var _PData = {
           "heightPX": "76px",
           "topPX": "404px",
           "leftPX": "111.5px",
-          correct: false
+          correct: false,
+          accessText: "Rock/Pop",
         }
       ],
     }
@@ -395,6 +419,7 @@ var _PData = {
           "leftPX": "140.5px",
           action: "feedback",
           presenter: true,
+          accessText: "Title",
         },
         {
           "HotspotId": 2,
@@ -407,7 +432,8 @@ var _PData = {
           "topPX": "46px",
           "leftPX": "2.5px",
           action: "next",
-          nextPageId: "p12"
+          nextPageId: "p12",
+          accessText: "Organize",
         }
       ],
       correctfeedback: "feedbackdata/feedbackp13c.htm",
@@ -427,8 +453,8 @@ var _PData = {
           "heightPX": "29px",
           "topPX": "108.984375px",
           "leftPX": "24.5px",
-          action: "next"
-
+          action: "next",
+          accessText: "Sort by",
         },
       ]
     }
@@ -448,6 +474,7 @@ var _PData = {
           "topPX": "102.96875px",
           "leftPX": "221.5px",
           action: "feedback",
+          accessText: "Title",
         },
       ],
       correctfeedback: "feedbackdata/feedbackp13c.htm",
@@ -467,7 +494,8 @@ var _PData = {
           "heightPX": "26px",
           "topPX": "44px",
           "leftPX": "124.5px",
-          action: "next"
+          action: "next",
+          accessText: "Create Playlist",
         },
       ],
     }
@@ -486,7 +514,8 @@ var _PData = {
           "heightPX": "33px",
           "topPX": "83px",
           "leftPX": "128.5px",
-          action: "next"
+          action: "next",
+          accessText: "Create Auto Playlist",
         },
       ],
     }
@@ -513,7 +542,8 @@ var _PData = {
           "heightPX": "25px",
           "topPX": "213px",
           "leftPX": "197.5px",
-          action: "next"
+          action: "next",
+          accessText: "Click here to add criteria",
         },
       ],
     }
@@ -532,7 +562,8 @@ var _PData = {
           "heightPX": "20px",
           "topPX": "360px",
           "leftPX": "220.5px",
-          action: "next"
+          action: "next",
+          accessText: "Genre",
         },
       ],
     }
@@ -551,7 +582,8 @@ var _PData = {
           "heightPX": "26px",
           "topPX": "213px",
           "leftPX": "246.5px",
-          action: "next"
+          action: "next",
+          accessText: "is",
         },
       ],
     }
@@ -570,7 +602,8 @@ var _PData = {
           "heightPX": "22px",
           "topPX": "273px",
           "leftPX": "245.5px",
-          action: "next"
+          action: "next",
+          accessText: "Contains",
         },
       ],
     }
@@ -589,7 +622,8 @@ var _PData = {
           "heightPX": "19px",
           "topPX": "217px",
           "leftPX": "299.5px",
-          action: "next"
+          action: "next",
+          accessText: "Click to Set",
         },
       ],
     }
@@ -608,7 +642,8 @@ var _PData = {
           "heightPX": "23px",
           "topPX": "361px",
           "leftPX": "302.5px",
-          action: "next"
+          action: "next",
+          accessText: "Country",
         },
       ],
     }
@@ -627,7 +662,8 @@ var _PData = {
           "heightPX": "33px",
           "topPX": "472px",
           "leftPX": "358.5px",
-          action: "feedback"
+          action: "feedback",
+          accessText: "Ok",
         },
       ],
       correctfeedback: "feedbackdata/feedbackp24c.htm",

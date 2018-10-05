@@ -62,7 +62,7 @@ var _Navigator = (function () {
             hasActivity: true,
             hashint: true,
             accessText: "Windows Media Player",
-       },
+        },
         "p5": {//optional
             pageId: "p5",
             prevPageId: "p4",
@@ -363,7 +363,7 @@ var _Navigator = (function () {
                         {
                             showQuestion();
                         }
-                        
+
                         //$("#hintdiv").show();
                         if (_currentPageObject.hideHint != undefined && _currentPageObject.hideHint) {
                             $("#hintlink").k_disable();
@@ -388,17 +388,11 @@ var _Navigator = (function () {
                             $("div#hintdiv").hide();
                         }
                         _NData[_currentPageObject.pageId].isLoaded = true;
-                        if (_currentPageObject.pageId == "p2")
-                            setReader("titleheader");
+                        if (_currentPageId == "p2") {
+                            $("#titleheader").focus();
+                        }
                         else {
-                            /*if($("body").hasClass("no-focus"))
-                            {
-                                setReader("titleheader");
-                            }
-                            else
-                            {*/
-                                setReader("progressdiv");
-                            //}
+                            $("#progressdiv").focus();
                         }
                     });
                 })

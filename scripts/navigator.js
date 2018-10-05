@@ -363,18 +363,7 @@ var _Navigator = (function () {
                         {
                             showQuestion();
                         }
-                        if (_currentPageObject.pageId == "p2")
-                            setReader("titleheader");
-                        else {
-                            //if($("body").hasClass("no-focus"))
-                            {
-                                setReader("titleheader");
-                            }
-                            // else
-                            // {
-                            //     setReader("progressdiv");
-                            // }
-                        }
+                        
                         //$("#hintdiv").show();
                         if (_currentPageObject.hideHint != undefined && _currentPageObject.hideHint) {
                             $("#hintlink").k_disable();
@@ -399,7 +388,18 @@ var _Navigator = (function () {
                             $("div#hintdiv").hide();
                         }
                         _NData[_currentPageObject.pageId].isLoaded = true;
-                        //$("h2.pageheading").focus();
+                        if (_currentPageObject.pageId == "p2")
+                            setReader("titleheader");
+                        else {
+                            /*if($("body").hasClass("no-focus"))
+                            {
+                                setReader("titleheader");
+                            }
+                            else
+                            {*/
+                                setReader("progressdiv");
+                            //}
+                        }
                     });
                 })
             }

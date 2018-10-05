@@ -387,9 +387,6 @@ var _ModuleCommon = (function () {
                 $(".divHotSpot, .divHotSpotdbl").addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
                 //this.ViewTextEntryInReviewMode();
             }
-            if (_Navigator.GetCurrentPage().pageId == "p2"){
-                setReader("#header-title #titleheader");
-            }
         },
 
         LoadHotSpot: function () {

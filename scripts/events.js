@@ -63,7 +63,6 @@ $(document).on("dblclick", ".divHotSpotdbl", function (event) {
         _ModuleCommon.HotspotClick(hotspot, event);
        
     },400)
-    
 });
 
 $(document).on("click", "#linkprevious", function (event) {

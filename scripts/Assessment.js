@@ -88,7 +88,8 @@ function showQuestion() {
 	$("#Questioninfo").text("Performance Check: Mini-Quiz: Question " + parseInt(currentQuestionIndex + 1) + " of 4")
 	//removeCSS("styles/questionPlaceholder.css")
 	$(".intro-content-question").fadeIn(600)
-	setReader("Questioninfo")
+	//setReader("Questioninfo");
+	$("#Questioninfo").focus();
 	if (_Navigator.IsPresenterMode()) {
 		showQuestionPresenterMode();
 		$("#linknext").k_enable()

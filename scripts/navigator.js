@@ -297,7 +297,7 @@ var _Navigator = (function () {
             $("#linknext").k_enable();
             $(".start-btn").k_disable();
         }
-        if((_currentPageObject.pageId == "p3" || _currentPageObject.pageId == "p7" || _currentPageObject.pageId == "p14" || _currentPageObject.pageId == "p25") && (isIpad || isIphone)){
+        if((_currentPageObject.pageId == "p3" || _currentPageObject.pageId == "p7" || _currentPageObject.pageId == "p14" || _currentPageObject.pageId == "p25") && (isIpad || isIphone || isSafari)){
             $(".activityvideo").attr("controls","true");
         }
     }

@@ -1,4 +1,4 @@
-
+var count="0";
 
 $(document).on("mouseover", ".qheight", function (event) {
     $(this).css({
@@ -65,7 +65,7 @@ $(document).on("click", ".divHotSpot", function (event) {
     },400)
 });*/
 
-$(document).on("click", ".divHotSpotDbl", function (event) {
+$(document).on("click", ".divHotSpotdbl", function (event) {
     debugger;
     if(_Navigator.IsPresenterMode()){
         return;

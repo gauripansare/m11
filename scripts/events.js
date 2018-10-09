@@ -47,7 +47,7 @@ $(document).on("click", ".divHotSpot", function (event) {
     
 });
 
-$(document).on("dblclick", ".divHotSpotdbl", function (event) {
+/*$(document).on("dblclick", ".divHotSpotdbl", function (event) {
     if(_Navigator.IsPresenterMode()){
         return;
     }
@@ -63,8 +63,36 @@ $(document).on("dblclick", ".divHotSpotdbl", function (event) {
         _ModuleCommon.HotspotClick(hotspot, event);
        
     },400)
-});
+});*/
 
+$(documashent).on("click", ".divHotSpotDbl", function (event) {
+    debugger;
+    if(_Navigator.IsPresenterMode()){
+        return;
+    }
+    if ($(this).attr("disabled") || $(this).hasClass("disabled")) {
+        event.preventDefault();
+        return;
+    }
+    else {
+        event.preventDefault();
+        count++;
+        if(count == 2)
+        {
+            $(this).k_disable()
+            if (hotspotclicked || _Navigator.IsAnswered())
+                return;
+            $(this).addClass("hotspotclicked")
+            hotspot = $(this);
+            setTimeout(function () {
+                hotspotclicked = false;
+                _ModuleCommon.HotspotClick(hotspot, event);
+            }, 400);
+            count = 0;
+        }
+    
+    }
+});
 $(document).on("click", "#linkprevious", function (event) {
     if ($(this).k_IsDisabled()) return;
     _Navigator.Prev();

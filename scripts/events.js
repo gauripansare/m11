@@ -65,7 +65,7 @@ $(document).on("click", ".divHotSpot", function (event) {
     },400)
 });*/
 
-$(documashent).on("click", ".divHotSpotDbl", function (event) {
+$(document).on("click", ".divHotSpotDbl", function (event) {
     debugger;
     if(_Navigator.IsPresenterMode()){
         return;

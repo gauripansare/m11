@@ -403,6 +403,9 @@ var _ModuleCommon = (function () {
                 $(".divHotSpot, .divHotSpotdbl").addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
                 //this.ViewTextEntryInReviewMode();
             }
+            if (Firefox) {
+                $('#footer-navigation').css('display', 'table');
+            }
         },
 
         LoadHotSpot: function () {

@@ -1,4 +1,3 @@
-var count="0";
 
 $(document).on("mouseover", ".qheight", function (event) {
     $(this).css({
@@ -30,7 +29,7 @@ $(document).on("click", ".qheight", function (event) {
 var hotspotclicked = false;;
 var hotspot;
 $(document).on("click", ".divHotSpot", function (event) {
-    if(_Navigator.IsPresenterMode()){
+    if (_Navigator.IsPresenterMode()) {
         return;
     }
     event.preventDefault();
@@ -42,9 +41,9 @@ $(document).on("click", ".divHotSpot", function (event) {
     hotspot = $(this);
     setTimeout(function () {
         hotspotclicked = false;
-        _ModuleCommon.HotspotClick(hotspot, event); 
-    },400)
-    
+        _ModuleCommon.HotspotClick(hotspot, event);
+    }, 400)
+
 });
 
 /*$(document).on("dblclick", ".divHotSpotdbl", function (event) {
@@ -64,10 +63,31 @@ $(document).on("click", ".divHotSpot", function (event) {
        
     },400)
 });*/
+$('.divHotSpotdbl')
+    .live('touchstart', function () {
+        isScrolling = false;
+    })
+    .live('touchmove', function (e) {
+        isScrolling = true;
+    })
+    .live('touchend', function (e) {
+        if (!isScrolling) {
+            $(this).k_disable()
+            if (hotspotclicked || _Navigator.IsAnswered())
+                return;
+            $(this).addClass("hotspotclicked")
+            hotspot = $(this);
+            setTimeout(function () {
+                hotspotclicked = false;
+                _ModuleCommon.HotspotClick(hotspot, event);
+            }, 400);
+        }
+    });
 
+var count = "0";
 $(document).on("click", ".divHotSpotdbl", function (event) {
     debugger;
-    if(_Navigator.IsPresenterMode()){
+    if (_Navigator.IsPresenterMode()) {
         return;
     }
     if ($(this).attr("disabled") || $(this).hasClass("disabled")) {
@@ -77,8 +97,7 @@ $(document).on("click", ".divHotSpotdbl", function (event) {
     else {
         event.preventDefault();
         count++;
-        if(count == 2)
-        {
+        if (count == 2) {
             $(this).k_disable()
             if (hotspotclicked || _Navigator.IsAnswered())
                 return;
@@ -90,16 +109,30 @@ $(document).on("click", ".divHotSpotdbl", function (event) {
             }, 400);
             count = 0;
         }
-    
     }
 });
+
+$(document).on("keydown", ".divHotSpotDbClick", function (event) {
+    if (_Navigator.IsPresenterMode()) {
+        return;
+    }
+    if (window.event) {
+        key = window.event.keyCode;
+    } else if (event) {
+        key = event.keyCode;
+    }
+    if (key == 13) {
+        $(this).trigger("click");
+    }
+});
+
 $(document).on("click", "#linkprevious", function (event) {
     if ($(this).k_IsDisabled()) return;
     _Navigator.Prev();
 });
 
 $(document).on("click", "#linknext", function (event) {
-    if ($(this).k_IsDisabled()) return;    
+    if ($(this).k_IsDisabled()) return;
     _Navigator.Next();
 });
 
@@ -156,8 +189,8 @@ $(document).on('click', ".activityimg", function (event) {
 });
 
 $(document).on('click', "#start", function (event) {
-   _Navigator.Next();
-   //_Navigator.LoadPage("p26")
+    _Navigator.Next();
+    //_Navigator.LoadPage("p26")
 });
 
 $(document).on('click', ".reviewsubmit", function (event) {
@@ -165,28 +198,28 @@ $(document).on('click', ".reviewsubmit", function (event) {
 });
 
 $(document).on('mouseover', ".hintlink", function (event) {
-    $(".hintlink .hintlinkspan").css({"color":"#b22222","border-bottom":"1px solid #b22222"})
-    $(this).find("path").css({"fill":"#b22222"})
+    $(".hintlink .hintlinkspan").css({ "color": "#b22222", "border-bottom": "1px solid #b22222" })
+    $(this).find("path").css({ "fill": "#b22222" })
 });
 
 $(document).on('mouseout', ".hintlink", function (event) {
-    $(".hintlink .hintlinkspan").css({"color":"#047a9c","border-bottom":"1px solid #047a9c"})
-    $(this).find("path").css({"fill":"#047a9c"}) 
+    $(".hintlink .hintlinkspan").css({ "color": "#047a9c", "border-bottom": "1px solid #047a9c" })
+    $(this).find("path").css({ "fill": "#047a9c" })
 });
 
 $(document).on('keydown', "#p17val1", function (event) {
-    var currentpid =_Navigator.GetCurrentPage().pageId;
+    var currentpid = _Navigator.GetCurrentPage().pageId;
     if (event.keyCode == 13) {
-        if($(this).val() == undefined || $(this).val() == ""){
+        if ($(this).val() == undefined || $(this).val() == "") {
             return;
         }
-        var inputtextids =  $("input[type='text']").map(function () {
+        var inputtextids = $("input[type='text']").map(function () {
             return $(this).attr("id");
         });
-        for(var i=0; i<inputtextids.length; i++){
+        for (var i = 0; i < inputtextids.length; i++) {
             _ModuleCommon.AddReviewData(inputtextids[i], true);
         }
-        if($.trim($(this).val()).toLowerCase() == _PData[currentpid].answerset){
+        if ($.trim($(this).val()).toLowerCase() == _PData[currentpid].answerset) {
             _Navigator.GetCurrentPage().isAnswered = true;
             _Navigator.Next();
         }
@@ -194,11 +227,11 @@ $(document).on('keydown', "#p17val1", function (event) {
 });
 
 $(document).on("change", ".assessmentradio", function (event) {
-    $(".assessmentSubmit").k_enable();  
+    $(".assessmentSubmit").k_enable();
 });
 
 $(document).on("click", ".assessmentSubmit", function (event) {
-    gRecordData.Questions[currentQuestionIndex].UserSelectedOptionId = $("input[type='radio']:checked").attr("id") ;
+    gRecordData.Questions[currentQuestionIndex].UserSelectedOptionId = $("input[type='radio']:checked").attr("id");
     gRecordData.Questions[currentQuestionIndex].IsAnswered = true;
     _Navigator.Next();
 });
@@ -209,5 +242,5 @@ $(document).on('click', ".menuArrow", function (event) {
 });
 
 $(document).on('click', ".inputcircle", function (event) {
-    $(this).next(".inpputtext").trigger( "click" );
+    $(this).next(".inpputtext").trigger("click");
 });

@@ -89,7 +89,7 @@ function showQuestion() {
 	//removeCSS("styles/questionPlaceholder.css")
 	$(".intro-content-question").fadeIn(600)
 	//setReader("Questioninfo");
-	$("#Questioninfo").focus();
+	$("#progressdiv").focus();
 	if (_Navigator.IsPresenterMode()) {
 		showQuestionPresenterMode();
 		$("#linknext").k_enable()
@@ -209,5 +209,5 @@ function showSummary() {
 	_Navigator.UpdateProgressBar();
 	var perscore = score / gRecordData.AssessmentScore * 100;
 	$("#ScoreSummary").text("Score: " + perscore + "%");
-	setReader("summaryheading")
+	$("#summaryheading").focus();
 }

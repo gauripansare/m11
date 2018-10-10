@@ -466,8 +466,6 @@ var _Navigator = (function () {
                     $("#climate-deal").css("margin-left", "23%");
                     $("#linknext").k_disable();
                     //$(".inputcircle").k_disable();
-
-
                 }
 
             }

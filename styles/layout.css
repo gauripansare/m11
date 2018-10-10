@@ -409,6 +409,7 @@ button:active, textarea:active, select:active,
     color: #047a9c;
     border-bottom: 1px solid rgb(4, 122, 156);
     margin-left: -2px;
+    min-width: 40px;
 }
 
 .hintinfodiv{

@@ -63,26 +63,6 @@ $(document).on("click", ".divHotSpot", function (event) {
        
     },400)
 });*/
-$('.divHotSpotdbl')
-    .live('touchstart', function () {
-        isScrolling = false;
-    })
-    .live('touchmove', function (e) {
-        isScrolling = true;
-    })
-    .live('touchend', function (e) {
-        if (!isScrolling) {
-            $(this).k_disable()
-            if (hotspotclicked || _Navigator.IsAnswered())
-                return;
-            $(this).addClass("hotspotclicked")
-            hotspot = $(this);
-            setTimeout(function () {
-                hotspotclicked = false;
-                _ModuleCommon.HotspotClick(hotspot, event);
-            }, 400);
-        }
-    });
 
 var count = "0";
 $(document).on("click", ".divHotSpotdbl", function (event) {

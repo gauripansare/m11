@@ -67,7 +67,7 @@ div, p, span, input, textarea {
     font-size: 16px;
 }
 
-input[type='button']:not(.divHotSpotCommon), button:not(.divHotSpotCommon) {
+input[type='button']:not(.divHotSpotCommon), button:not(.divHotSpotCommon){
     color: white;
     padding: 5px 15px;
     border-radius: 5px;
@@ -78,6 +78,10 @@ input[type='button']:not(.divHotSpotCommon), button:not(.divHotSpotCommon) {
     min-width: 100px;
 }
 
+.hintlinkspan{
+    background-color: white;
+    border-right: none;
+}
 a:focus, input:focus, button:focus, textarea:focus, select:focus, a:active, input:active, 
 button:active, textarea:active, select:active,
  .questioninnerwrapper input[type="radio"]:focus + .inputcircle::after,

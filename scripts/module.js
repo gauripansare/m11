@@ -23,7 +23,7 @@ var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 var isIpad = userAgentCustom.match(/iPad/i)
 var isIphone = (navigator.userAgent.match(/iPhone/i))
 var isIEEdge = /Edge/.test(navigator.userAgent)
-var Firefox = /Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)
+var isFirefox = /Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)
 
 var _ModuleCommon = (function () {
     var reviewData = [];
@@ -253,13 +253,16 @@ var _ModuleCommon = (function () {
                                         if (k == 0) {
                                             if (rData.textEntry[k].trim().toLowerCase() == pageData.answerset[k].trim().toLowerCase()) {
                                                 $("#" + rData.objId).val(rData.textEntry[k]).css({ "color": ColorCodes.green, "font-weight": "bold" });
+                                                $("#" + rData.objId).attr("aria-label","correct value entered");
                                             }
                                             else {
                                                 $("#" + rData.objId).val(rData.textEntry[k]).css({ "color": ColorCodes.red, "font-weight": "bold" });
+                                                $("#" + rData.objId).attr("aria-label","incorrect value entered");
                                             }
                                         }
                                         if (k == 1) {
                                             $("#" + pageData.EmbedSettings[j].reviewid).text(rData.textEntry[k]).css({ "color": ColorCodes.green, "font-weight": "bold" });
+                                            $("#acc" + pageData.EmbedSettings[j].reviewid).text("correct value Entered " + rData.textEntry[k]);
                                             $("#" + pageData.EmbedSettings[j].reviewid).show();
                                         }
                                     }
@@ -403,7 +406,7 @@ var _ModuleCommon = (function () {
                 $(".divHotSpot, .divHotSpotdbl").addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
                 //this.ViewTextEntryInReviewMode();
             }
-            if (Firefox) {
+            if (isFirefox) {
                 $('#footer-navigation').css('display', 'table');
             }
         },

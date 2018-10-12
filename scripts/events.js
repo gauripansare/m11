@@ -66,7 +66,6 @@ $(document).on("click", ".divHotSpot", function (event) {
 
 var count = "0";
 $(document).on("click", ".divHotSpotdbl", function (event) {
-    debugger;
     if (_Navigator.IsPresenterMode()) {
         return;
     }

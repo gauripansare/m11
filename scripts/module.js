@@ -413,6 +413,7 @@ var _ModuleCommon = (function () {
             if (isFirefox) {
                 $('#footer-navigation').css('display', 'table');
             }
+            $("h2.pageheading").attr("tabindex","-1");
         },
 
         LoadHotSpot: function () {

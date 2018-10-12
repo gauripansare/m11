@@ -266,7 +266,7 @@ var _ModuleCommon = (function () {
                                         }
                                         if (k == 1) {
                                             $("#" + pageData.EmbedSettings[j].reviewid).text(rData.textEntry[k]).css({ "color": ColorCodes.green, "font-weight": "bold" });
-                                            $("#acc" + pageData.EmbedSettings[j].reviewid).text("correct value Entered " + rData.textEntry[k] +" and incorrect value entered "+rData.textEntry[k-1]);
+                                            $("#acc" + pageData.EmbedSettings[j].reviewid).text("correct value Entered " + rData.textEntry[k] +" incorrect value entered "+rData.textEntry[k-1]);
                                             $("#" + pageData.EmbedSettings[j].reviewid).show();
                                         }
                                     }

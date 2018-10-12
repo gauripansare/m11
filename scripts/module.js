@@ -253,16 +253,20 @@ var _ModuleCommon = (function () {
                                         if (k == 0) {
                                             if (rData.textEntry[k].trim().toLowerCase() == pageData.answerset[k].trim().toLowerCase()) {
                                                 $("#" + rData.objId).val(rData.textEntry[k]).css({ "color": ColorCodes.green, "font-weight": "bold" });
-                                                $("#" + rData.objId).attr("aria-label","correct value entered");
+                                                $("#acc" + pageData.EmbedSettings[j].reviewid).text("correct value Entered " + rData.textEntry[k]);
+                                                $("#" + rData.objId).attr("aria-hidden","true");
+                                                $("#" + rData.objId).prev("label").attr("aria-hidden","true");
                                             }
                                             else {
                                                 $("#" + rData.objId).val(rData.textEntry[k]).css({ "color": ColorCodes.red, "font-weight": "bold" });
-                                                $("#" + rData.objId).attr("aria-label","incorrect value entered");
+                                                //$("#acc" + pageData.EmbedSettings[j].reviewid).text("incorrect value Entered " + rData.textEntry[k]);
+                                                $("#" + rData.objId).attr("aria-hidden","true");
+                                                $("#" + rData.objId).prev("label").attr("aria-hidden","true");
                                             }
                                         }
                                         if (k == 1) {
                                             $("#" + pageData.EmbedSettings[j].reviewid).text(rData.textEntry[k]).css({ "color": ColorCodes.green, "font-weight": "bold" });
-                                            $("#acc" + pageData.EmbedSettings[j].reviewid).text("correct value Entered " + rData.textEntry[k]);
+                                            $("#acc" + pageData.EmbedSettings[j].reviewid).text("correct value Entered " + rData.textEntry[k] +" and incorrect value entered "+rData.textEntry[k-1]);
                                             $("#" + pageData.EmbedSettings[j].reviewid).show();
                                         }
                                     }

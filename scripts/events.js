@@ -132,12 +132,16 @@ $(document).on("click", ".hintlink", function (event) {
             $(".hintlink").attr("aria-expanded", "true");
         });
     }
+    $(".hintlink").focus();
+
 });
 
 $(document).on("click", ".closehintlink", function (event) {
     $(".hintlink").removeClass("expanded")
     $(".hintlink").attr("aria-expanded", "false")
-    $(".hintcontainer").slideUp(100);
+    $(".hintcontainer").slideUp(100,function(){$(".hintlink").focus();});
+
+
 });
 
 $(document).on("keydown", "input.EmbededElement", function (event) {

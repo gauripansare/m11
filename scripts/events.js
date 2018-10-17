@@ -125,21 +125,31 @@ $(document).on("click", ".hintlink", function (event) {
         $(".hintlink").attr("aria-expanded", "false")
         $(".hintcontainer").slideUp(100);
         $(".pageheading").focus();
+        open = "close";
     }
     else {
         $(".hintcontainer").slideDown(100, function () {
             $(".hintlink").addClass("expanded");
             $(".hintlink").attr("aria-expanded", "true");
+            $(".hintcontainer .hintcontent").find("p:first").attr("tabindex", "-1")
             $(".hintcontainer .hintcontent").find("p:first").focus();
         });
     }
-    //$(".hintlink").focus();
+    if (_Navigator.IsRevel()) {
+        LifeCycleEvents.OnInteraction("Hint button click. Hint " + open)
+    }
+   
 });
 
 $(document).on("click", ".closehintlink", function (event) {
-    $(".hintlink").removeClass("expanded");
-    $(".hintlink").attr("aria-expanded", "false");
+
+    $(".hintlink").removeClass("expanded")
+    $(".hintlink").attr("aria-expanded", "false")
     $(".hintcontainer").slideUp(100,function(){$("h2.pageheading").focus();});
+    if (_Navigator.IsRevel()) {
+        LifeCycleEvents.OnInteraction("Hint button click. Hint closed")
+    }
+
 });
 
 $(document).on("keydown", "input.EmbededElement", function (event) {
@@ -213,8 +223,12 @@ $(document).on("change", ".assessmentradio", function (event) {
 });
 
 $(document).on("click", ".assessmentSubmit", function (event) {
-    gRecordData.Questions[currentQuestionIndex].UserSelectedOptionId = $("input[type='radio']:checked").attr("id");
+    if (_Navigator.IsRevel()) {
+        LifeCycleEvents.OnSubmit();
+    }
+    gRecordData.Questions[currentQuestionIndex].UserSelectedOptionId = $("input[type='radio']:checked").attr("id") ;
     gRecordData.Questions[currentQuestionIndex].IsAnswered = true;
+    _Navigator.GetBookmarkData();
     _Navigator.Next();
 });
 
@@ -226,3 +240,55 @@ $(document).on('click', ".menuArrow", function (event) {
 $(document).on('click', ".inputcircle", function (event) {
     $(this).next(".inpputtext").trigger("click");
 });
+
+window.onload = function () {
+    _ScormUtility.Init();
+}
+
+window.onunload = function () {
+    _ScormUtility.End();
+}
+
+   $(document).on("mousemove", ".imgSliderHover", function (e) {
+        var cursorX = e.pageX - this.offsetLeft;
+        console.log(cursorX + ":: X ::");
+        var imagerightPosition = Number($(".imgAnimate").css('right').replace("px", ""));
+        if (cursorX >= 179 && cursorX <= 575) {
+            if (imagerightPosition == -400) {
+                $(".activityContainer .imgAnimate").animate({ right: "-=400px" }, { queue: false, complete: function () { } });
+            }
+        }
+        if (cursorX >= 575 && cursorX <= 975) {
+            if (imagerightPosition == -800) {
+                $(".activityContainer .imgAnimate").animate({ right: "+=400px" }, { queue: false, complete: function () { } });
+            }
+        }
+    });
+    
+    $(document).on("mousemove", ".imgAnimate", function (e) {
+        var cursorXX = e.pageX - this.offsetLeft;
+        console.log(cursorXX + ":: XX ::");
+        var imagerightPosition = Number($(".imgAnimate").css('right').replace("px", ""));
+        if (cursorXX >= 340 && cursorXX <= 575) {
+            if (imagerightPosition == -400) {
+                $(".activityContainer .imgAnimate").animate({ right: "+=400px" }, { queue: false, complete: function () { } });
+            }
+        }
+        if (imagerightPosition == 0) {
+            if (cursorXX >= 179 && cursorXX <= 575) {
+                $(".activityContainer .imgAnimate").animate({ right: "-=800px" }, { queue: false, complete: function () { } });
+            }
+            if (cursorXX >= 401 && cursorXX <= 730) {
+                $(".activityContainer .imgAnimate").animate({ right: "-=400px" }, { queue: false, complete: function () { } });
+            }
+        }
+    });
+    $(document).on("mouseout", ".imgSliderHover, .imgAnimate", function (e) {
+        var imagerightPosition = Number($(".imgAnimate").css('right').replace("px", ""));
+        if (imagerightPosition == -400) {
+            $(".activityContainer .imgAnimate").animate({ right: "+=400px" }, { queue: false, complete: function () { } });
+        }
+        if (imagerightPosition == 0) {
+            $(".activityContainer .imgAnimate").animate({ right: "-=400px" }, { queue: false, complete: function () { } });
+        }
+    });

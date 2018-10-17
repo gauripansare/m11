@@ -1,4 +1,6 @@
-﻿//This api will contain navigation logic and page load.
+﻿var isscorm = false;
+var isrevel = false;
+//This api will contain navigation logic and page load.
 //It will also handle the question navigation if the page is having multiple questions.
 var _Navigator = (function () {
     var _currentPageId = "";
@@ -6,6 +8,7 @@ var _Navigator = (function () {
     var progressLevels = [26];
     var totalsimscore = 18;
     var presentermode = false;
+    var bookmarkpageid = "";
     var _NData = {
         "p1": {
             pageId: "p1",
@@ -52,6 +55,7 @@ var _Navigator = (function () {
             nextPageId: "p4",
             dataurl: "p3.htm",
             hasActivity: true,
+            hasVideo: true,
         },
         "p4": {
             pageId: "p4",
@@ -89,6 +93,7 @@ var _Navigator = (function () {
             nextPageId: "p8",
             dataurl: "p7.htm",
             hasActivity: true,
+            hasVideo: true,
         },
         "p8": {
             pageId: "p8",
@@ -156,6 +161,7 @@ var _Navigator = (function () {
             nextPageId: "p15",
             dataurl: "p14.htm",
             hasActivity: true,
+            hasVideo: true,
         },
         "p15": {
             pageId: "p15",
@@ -263,6 +269,7 @@ var _Navigator = (function () {
             nextPageId: "p26",
             dataurl: "p25.htm",
             hasActivity: true,
+            hasVideo: true,
         },
 
         "p26": {
@@ -297,8 +304,8 @@ var _Navigator = (function () {
             $("#linknext").k_enable();
             $(".start-btn").k_disable();
         }
-        if((_currentPageObject.pageId == "p3" || _currentPageObject.pageId == "p7" || _currentPageObject.pageId == "p14" || _currentPageObject.pageId == "p25") && (isIpad || isIphone || isSafari)){
-            $(".activityvideo").attr("controls","true");
+        if ((_currentPageObject.pageId == "p3" || _currentPageObject.pageId == "p7" || _currentPageObject.pageId == "p14" || _currentPageObject.pageId == "p25") && (isIpad || isIphone || isSafari)) {
+            $(".activityvideo").attr("controls", "true");
         }
     }
     return {
@@ -314,7 +321,10 @@ var _Navigator = (function () {
         },
 
         LoadPage: function (pageId, jsonObj) {
-            console.log(pageId)
+            if (_Navigator.IsRevel() && _currentPageId !=undefined && _currentPageId !="") {
+               LifeCycleEvents.OnUnloadFromPlayer()
+            }
+            bookmarkpageid = pageId;
             if (jsonObj == undefined) {
                 jsonObj = {};
             }
@@ -330,15 +340,17 @@ var _Navigator = (function () {
                 $("#linknext").k_enable();
                 $("footer").hide();
                 $("#header-progress").hide();
+                if (presentermode)
+                    _ModuleCommon.AppendFooter();
 
             }
             if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity && !this.IsAnswered()) {
                 $("#linknext").k_disable();
             }
-            if (this.IsAnswered()) {
+            if (this.IsAnswered() || _currentPageObject.played) {
                 $("#linknext").k_enable();
-
             }
+
             if (_currentPageObject.isLastPage != undefined && _currentPageObject.isLastPage) {
                 $("#linknext").k_disable();
             }
@@ -354,25 +366,43 @@ var _Navigator = (function () {
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad();
-                    setReader("header1");
+                    //setReader("header1");
+                    $("#header1").focus();
                 });
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
-                        OnPageLoad();
+                        if ($(".activityimg").length > 0) {
+                            $('.activityimg').load(function () {
+                                OnPageLoad();
+                                if (_currentPageObject.pageId == "p2") {
+                                    $("#titleheader").focus();
+                                }
+                                else {
+                                    if (_currentPageId != "p26") {
+                                        $("#progressdiv").focus();
+                                    }
+                                    else {
+                                        $("#Questioninfo").focus();
+                                    }
+                                }
+                                if (presentermode) {
+                                    _ModuleCommon.PresenterMode();
+                                }
+
+                            });
+                        }
+
                         if (_currentPageId == "p26")//  change to assessment id
                         {
-                            showQuestion();
+                            _Assessment.ShowQuestion();
                         }
 
                         //$("#hintdiv").show();
                         if (_currentPageObject.hideHint != undefined && _currentPageObject.hideHint) {
                             $("#hintlink").k_disable();
                             $(".hintdiv").hide();
-                        }
-                        if (presentermode) {
-                            _ModuleCommon.PresenterMode();
                         }
                         if (_currentPageObject.hinturl != undefined || _currentPageObject.hashint) {
                             $("div#hintdiv").show();
@@ -390,15 +420,16 @@ var _Navigator = (function () {
                             $("div#hintdiv").hide();
                         }
                         _NData[_currentPageObject.pageId].isLoaded = true;
-                        if (_currentPageId == "p2") {
-                            $("#titleheader").focus();
-                        }
-                        else {
-                            $("#progressdiv").focus();
-                        }
+
+                        _Navigator.GetBookmarkData();
                     });
                 })
             }
+
+            if (_Navigator.IsRevel()) {
+                LifeCycleEvents.OnLoadFromPlayer()
+             }
+
         },
         LoadDefaultQuestion: function () {
             if (_currentPageObject.questions.length > 0) {
@@ -416,6 +447,9 @@ var _Navigator = (function () {
             }
         },
         Prev: function () {
+            if (_Navigator.IsRevel()) {
+                LifeCycleEvents.OnInteraction("Previous link click.")
+            }
             if (_currentPageObject.pageId == "p26" && typeof (currentQuestionIndex) != 'undefined' && currentQuestionIndex > 0) {
                 $("#ReviewIns").hide();
                 $(".intro-content-question").show();
@@ -423,7 +457,7 @@ var _Navigator = (function () {
                 currentQuestionIndex = currentQuestionIndex - 1;
                 $("#Summary").empty();
                 $("#Summary").hide();
-                showQuestion();
+                _Assessment.ShowQuestion();
             }
             else {
                 this.LoadPage(_currentPageObject.prevPageId);
@@ -431,16 +465,17 @@ var _Navigator = (function () {
 
         },
         Next: function () {
-            $("#linkprevious").k_enable();
-            if (_currentPageObject.customNext != undefined && !_currentPageObject.customNext.isComplete) {
-                var custFunction = new Function(_currentPageObject.customNext.jsFunction);
-                custFunction();
+            if (_Navigator.IsRevel()) {
+                LifeCycleEvents.OnInteraction("Next link click.")
             }
+            $("#linkprevious").k_enable();
+            
             if (_currentPageObject.pageId == "p26") {
+
                 if (typeof (currentQuestionIndex) != 'undefined' && typeof (gRecordData.Questions) != 'undefined' && (currentQuestionIndex + 1) < gRecordData.Questions.length) {
                     currentQuestionIndex = currentQuestionIndex + 1
                     $("#Questioninfo").show();
-                    showQuestion()
+                    _Assessment.ShowQuestion()
 
                     //this.UpdateProgressBar();
                     if (gRecordData.Status != "Completed" && !presentermode) {
@@ -458,7 +493,7 @@ var _Navigator = (function () {
                     $("#Summary").show();
                     $("#Questioninfo").hide();
                     $("#Summary").load("pagedata/Summary.htm", function () {
-                        showSummary()
+                        _Assessment.ShowSummary()
                         $("#linkprevious").k_enable();
                         $("#Summary").find("input[type='radio']").attr("readonly", "readonly");
                         $(".question-band").find("img").attr("aria-hidden", "true");
@@ -557,6 +592,9 @@ var _Navigator = (function () {
         IsPresenterMode: function () {
             return presentermode;
         },
+        SetVideoStatus: function(){
+            _NData[_currentPageId].played = true;
+        },
         SetNextPageId: function (nextpageid) {
             if (nextpageid == "p12") {
                 _NData[_currentPageObject.nextPageId].prevPageId = "p13";
@@ -571,8 +609,151 @@ var _Navigator = (function () {
                 progressLevels[0] = progressLevels[0] + 1;//increase num of pages by 1 
             }
             _NData[_currentPageId].nextPageId = nextpageid;
+            this.GetBookmarkData();
 
+        },
+         GetBookmarkData: function () {
+            if (!this.IsScorm() && !this.IsRevel())
+                return;
+            var bookmarkobj = {}
+            bookmarkobj.BMPageId = bookmarkpageid;
+            bookmarkobj.VisistedPages = this.GetNavigatorBMData();
+            bookmarkobj.ProgressLevels = progressLevels;
+            bookmarkobj.ReviewData = _ModuleCommon.GetReviewData();
+            bookmarkobj.AssessmentData = _Assessment.Getbookmarkdata();
+            if (this.IsRevel()) {
+                if (k_Revel.get_LaunchData().mode == LaunchModes.do) {
+                    var suspend_data = JSON.stringify(bookmarkobj);
+                    k_Revel.set_StateData(JSON.parse(suspend_data))
+                    k_Revel.PostData(gRecordData.Score, gRecordData.AssessmentScore);
+                }
+            }
+            else if (this.IsScorm()) {
+                _ScormUtility.SetSuspendData(JSON.stringify(bookmarkobj))
+            }
 
+        },
+        GetNavigatorBMData: function () {
+            var gVisistedPages = [];
+            for (var i in _NData) {
+                if (_NData[i].isAnswered || _NData[i].hasVideo) {
+                    if(_NData[i].hasVideo){
+                        gVisistedPages.push({ id: _NData[i].pageId, prev: _NData[i].prevPageId, next: _NData[i].nextPageId, played: _NData[i].played })
+                    }else{
+                        gVisistedPages.push({ id: _NData[i].pageId, prev: _NData[i].prevPageId, next: _NData[i].nextPageId })
+                    }
+                }
+            }
+            return gVisistedPages;
+        },
+        SetNavigatorBMData: function (gVisistedPages) {
+            for (var i = 0; i < gVisistedPages.length; i++) {
+                if(_NData[gVisistedPages[i].id].hasVideo  ){
+                    if( _NData[gVisistedPages[i].id].played != undefined &&  _NData[gVisistedPages[i].id].played )
+                    _NData[gVisistedPages[i].id].isAnswered = gVisistedPages[i].played;
+                    _NData[gVisistedPages[i].id].played = gVisistedPages[i].played;
+                }
+                else{
+                    _NData[gVisistedPages[i].id].isAnswered = true;
+                }
+                _NData[gVisistedPages[i].id].prevPageId = gVisistedPages[i].prev;
+                _NData[gVisistedPages[i].id].nextPageId = gVisistedPages[i].next;
+            }
+        },
+          SetBookMarkPage: function () {
+            if (this.IsScorm()) {
+                _ScormUtility.SetBookMark(bookmarkpageid);
+            }
+            else if (this.IsRevel()) {
+                this.GetBookmarkData();
+            }
+        },
+        SetBookmarkData: function () {
+            var bookmarkdata;
+            if(this.IsScorm())
+            {
+                bookmarkdata = _ScormUtility.GetSuspendData();
+            }
+            else if(this.IsRevel())
+            {
+                bookmarkdata = JSON.stringify(k_Revel.get_StateData())
+            }
+            
+            if (bookmarkdata != undefined && bookmarkdata != "") {
+                bookmarkdata = JSON.parse(bookmarkdata);
+                bookmarkpageid = bookmarkdata.BMPageId;
+                this.SetNavigatorBMData(bookmarkdata.VisistedPages)
+                progressLevels = bookmarkdata.ProgressLevels;
+                _ModuleCommon.SetReviewData(bookmarkdata.ReviewData)
+                _Assessment.Setbookmarkdata(bookmarkdata.AssessmentData)
+            }
+        },
+        GetBookMarkPage: function () {
+            return bookmarkpageid;
+        },
+        Initialize: function () {
+            if (isscorm) {
+                _ScormUtility.Init();
+                _Navigator.SetBookmarkData();
+                //bookmarkpageid = _ScormUtility.GetBookMark();
+                this.GotoBookmarkPage();
+            }
+            else if (isrevel) {
+                g_tempIntv = setInterval(function () {
+                    if ((typeof piSession != 'undefined' && typeof piSession.currentToken() != 'undefined' && piSession.currentToken() != null)) {
+                        clearInterval(g_tempIntv);
+                        g_tempIntv = null;
+                        //The rest of the code will go here.
+                        LifeCycleEvents.InitParams();
+                        LifeCycleEvents.OnLoad();
+                        if (!k_Revel.isLaunchInitialize()) {
+                            k_Revel.InitLaunch()
+                            var suspend_data = JSON.stringify(k_Revel.get_StateData());
+                            if (suspend_data != "" && suspend_data != "{}") {
+                                var isTrue = this.SetBookmarkData();
+                                if (isTrue && k_Revel.get_LaunchData().mode == "do") {
+                                    this.GotoBookmarkPage();
+                                } else {
+                                    k_Revel.set_StateData(JSON.parse(suspend_data))
+                                }
+                            }
+                        }
+                        if (k_Revel.get_LaunchData().mode == "review") {
+                            var suspend_data = JSON.stringify(k_Revel.get_StateData());
+                            if (suspend_data != "" && suspend_data != "{}") {
+                                this.SetBookmarkData(suspend_data);
+                                isReview = true;
+                            }
+                        }
+                    }
+                }, 100);
+
+            }
+            else
+            {
+                _Navigator.Start();
+            }
+        },
+        GotoBookmarkPage: function () {
+           
+            if (bookmarkpageid != undefined && bookmarkpageid != "") {
+                _Navigator.LoadPage(bookmarkpageid)
+            }
+            else {
+                _Navigator.Start();
+            }
+        },
+        IsScorm: function () {
+            if (isscorm == true)
+                return true;
+
+            return false;
+
+        },
+        IsRevel: function () {
+            if (isrevel == true)
+                return true;
+            return false;
         }
     };
 })();

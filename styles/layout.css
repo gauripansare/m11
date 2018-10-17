@@ -92,7 +92,8 @@ button:active, textarea:active, select:active,
 .no-focus .questioninnerwrapper input[type="radio"]:focus + .inputcircle::after {
     outline: none
 }
-#progressdiv:focus,#titleheader:focus,#header1:focus{ /*for accessibility*/
+
+#progressdiv:focus,#titleheader:focus,#header1:focus,#div_feedback p:focus,#Questioninfo:focus,#summaryheading:focus,.pageheading:focus,p:focus{ /*for accessibility*/
     outline: none
 }
 .mxwidth {

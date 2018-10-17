@@ -102,7 +102,8 @@
     height: auto;
     position: relative;
     display:flexbox;
-    justify-content:center
+    justify-content:center;
+    overflow: hidden
 }
 
 .activityimg {
@@ -454,8 +455,19 @@ position: absolute;
 }
 /*presenter Mode css End*/
 
+.activityContainer .imgSliderHover{
+    display: none;
+    width: 796px;
+    top: 0px;
+    left: 0px;
+}
 
-
+.activityContainer .imgAnimate {
+    display: none;
+    position: absolute;
+    width: 796px;
+    top: 0px;
+}
 
 
 

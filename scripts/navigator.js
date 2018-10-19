@@ -398,7 +398,9 @@ var _Navigator = (function () {
                         {
                             _Assessment.ShowQuestion();
                         }
-
+                        if (_Navigator.GetCurrentPage().hasVideo && !_Navigator.IsAnswered()) {
+                            $('html,body').animate({ scrollTop: document.body.scrollHeight }, 1000, function () { });
+                        }
                         //$("#hintdiv").show();
                         if (_currentPageObject.hideHint != undefined && _currentPageObject.hideHint) {
                             $("#hintlink").k_disable();

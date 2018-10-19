@@ -61,7 +61,7 @@ var _ScormUtility = (function () {
         SetScore: function (scoreval) {
             if (!isscorm)
                 return;
-            var minscr = scorm.set("cmi.score.min", "10.00");
+            var minscr = scorm.set("cmi.score.min", "80.00");
             var maxscr = scorm.set("cmi.score.max", "100.00");
             var setStatus = scorm.set("cmi.score.raw", "" + scoreval);
         }

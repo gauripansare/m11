@@ -464,33 +464,42 @@ var _ModuleCommon = (function () {
         },
 
         PresenterMode: function () {
+            debugger;
             var currentPageData = _Navigator.GetCurrentPage();
             var pageData = this.GetPageDetailData();
-            var hotspotLength = pageData.ImageHotSpots.Hotspots.length;
+            var appendImage = $(".wrapperimage");
             if (currentPageData.pageId == "p17" && pageData.EmbedSettings != undefined) {
                 $("input[type='text']").addClass("greenspan");
                 $("input[type='text']").val(pageData.answerset[0]);
                 $("input[type='text']").k_disable();
             }
-            /* if(hotspotLength > 1 && currentPageData.pageId == "p6" || currentPageData.pageId == "p10"){
-                 for(var i=0; i < hotspotLength; i++){
-                     if(pageData.ImageHotSpots.Hotspots[i].presenter){
- 
+            else {
+                /* if(hotspotLength > 1 && currentPageData.pageId == "p6" || currentPageData.pageId == "p10"){
+                     for(var i=0; i < hotspotLength; i++){
+                         if(pageData.ImageHotSpots.Hotspots[i].presenter){
+     
+                         }
                      }
                  }
-             }
-             else{*/
-            if (currentPageData.pageId == "p6" || currentPageData.pageId == "p10") {
-                $(".divHotSpotdbl").addClass("hotspotclicked");
-                $(".divHotSpotdbl").addClass("disabled");
-                $(".divHotSpot").addClass("disabled");
-            }
-            else {
-                $(".divHotSpot").addClass("hotspotclicked");
-                $(".divHotSpot").addClass("disabled");
+                 else{*/
+                var posObj = pageData.ImageHotSpots.Hotspots[0];
+                var _div = "<div class='reviewDiv Correct' style='z-index:5;width:39px;height:39px;position:absolute;left:" + posObj.left + ";top:" + posObj.top + ";'><img src='assets/images/review-correct.png' style='width:39px;height:35px;' /></div>";
+                if (currentPageData.pageId == "p6" || currentPageData.pageId == "p10") {
+                    $(".divHotSpotdbl").addClass("hotspotclicked");
+                    $(".divHotSpotdbl").addClass("disabled");
+                    $(".divHotSpot").addClass("disabled");
+                    appendImage.append(_div);
+                }
+                else {
+                    $(".divHotSpot").addClass("hotspotclicked");
+                    $(".divHotSpot").addClass("disabled");
+                    appendImage.append(_div);
+                }
             }
             //}
             $("#linknext").k_enable();
+            _Navigator.SetPageStatus(true);
+            _Navigator.UpdateProgressBar();
         },
 
         ApplycontainerWidth: function () {
@@ -716,6 +725,9 @@ var _ModuleCommon = (function () {
         videoStart: function () {
             if (!_Navigator.IsAnswered()) {
                 $('html,body').animate({ scrollTop: document.body.scrollHeight }, 1000, function () { });
+            }
+            if (_Navigator.IsPresenterMode()) {
+                $("#linknext").k_enable();
             }
 
         },

@@ -114,20 +114,23 @@ var _Assessment = (function () {
 			_Navigator.GetBookmarkData();
 		},
 		ShowQuestionPresenterMode: function () {
+			debugger;
 			var currQuestion = gRecordData.Questions[currentQuestionIndex];
 			var correctoption = currQuestion.Options.filter(function (item) {
 				return item.IsCorrect;
 			})[0];
 			$("#" + correctoption.OptionId).prop("checked", "true");
 			$("input[type='radio']").k_disable();
-			var iscorrectimg = $("#" + correctoption.OptionId).closest("label").find(".iscorrect").find("img")
+			var iscorrectimg = $("#" + correctoption.OptionId).prev(".iscorrect").find("img")
 			$("#" + correctoption.OptionId).closest("label").css("position", "relative");
 			iscorrectimg.attr("src", "assets/images/tick-icon-correct-1.png");
 			iscorrectimg.attr({ "alt": "", "aria-hidden": "true" });
 			iscorrectimg.closest("span").show();
 			iscorrectimg.attr("aria-label", "Correct option selected");
-			gRecordData.Status = "Completed";
+			gRecordData.Questions[currentQuestionIndex].IsAnswered = true;
+			
 			$("#linknext").k_enable();
+			$("#linkprevious").k_enable();
 
 		},
 		ShowUserReviewMode: function () {
@@ -265,7 +268,11 @@ var _Assessment = (function () {
 				gRecordData.Score = score;
 				this.SetScore(perscore);
 			}
-			_Navigator.UpdateProgressBar();;
+			else if(_Navigator.IsPresenterMode())
+			{
+				gRecordData.Status = "Completed";
+			}
+			_Navigator.UpdateProgressBar();
 			var perscore = gRecordData.Score / parseInt(gRecordData.AssessmentScore) * 100;
 			
 			$("#ScoreSummary").text("Score: " + perscore + "%");
@@ -273,7 +280,7 @@ var _Assessment = (function () {
 			$("#progressdiv").focus();
 		},
 		SetScore: function (perscore) {
-			if (isscorm) {
+			if (_Navigator.IsScorm()) {
 				_ScormUtility.SetScore(perscore);
 				_ScormUtility.Scormcomplete()
 			}

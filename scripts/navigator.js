@@ -1,13 +1,14 @@
-﻿var isscorm = false;
-var isrevel = false;
+﻿//var isscorm = false;
+//var isrevel = false;
 //This api will contain navigation logic and page load.
 //It will also handle the question navigation if the page is having multiple questions.
 var _Navigator = (function () {
+    var packageType = "presenter";//presenter/scorm/revel
     var _currentPageId = "";
     var _currentPageObject = {};
     var progressLevels = [26];
     var totalsimscore = 18;
-    var presentermode = false;
+    //var presentermode = false;
     var bookmarkpageid = "";
     var _NData = {
         "p1": {
@@ -300,7 +301,7 @@ var _Navigator = (function () {
             $(".activityimg").attr("alt", _currentPageObject.accessText);
         }
         _ModuleCommon.OnPageLoad();
-        if (presentermode) {
+        if (_Navigator.IsPresenterMode()) {
             $("#linknext").k_enable();
             $(".start-btn").k_disable();
         }
@@ -315,7 +316,7 @@ var _Navigator = (function () {
 
         Start: function () {
             this.LoadPage("p1");
-            if (presentermode) {
+            if (this.IsPresenterMode()) {
                 _ModuleCommon.AppendFooter();
             }
         },
@@ -340,7 +341,7 @@ var _Navigator = (function () {
                 $("#linknext").k_enable();
                 $("footer").hide();
                 $("#header-progress").hide();
-                if (presentermode)
+                if (this.IsPresenterMode())
                     _ModuleCommon.AppendFooter();
 
             }
@@ -387,7 +388,7 @@ var _Navigator = (function () {
                                         $("#Questioninfo").focus();
                                     }
                                 }
-                                if (presentermode) {
+                                if (_Navigator.IsPresenterMode() && (_currentPageObject.pageId !="p26" || _currentPageObject.pageId !="summary" || !_currentPageObject.hasVideo )) {
                                     _ModuleCommon.PresenterMode();
                                 }
 
@@ -400,6 +401,14 @@ var _Navigator = (function () {
                         }
                         if (_Navigator.GetCurrentPage().hasVideo && !_Navigator.IsAnswered()) {
                             $('html,body').animate({ scrollTop: document.body.scrollHeight }, 1000, function () { });
+                        }
+                        if (_Navigator.GetCurrentPage().hasVideo && _Navigator.IsPresenterMode()){
+                            _Navigator.SetPageStatus(true);
+                            _Navigator.UpdateProgressBar();
+                        }
+                        if (_Navigator.GetCurrentPage().pageId == "p17" && _Navigator.IsPresenterMode()){
+                            _Navigator.SetPageStatus(true);
+                            _Navigator.UpdateProgressBar();
                         }
                         //$("#hintdiv").show();
                         if (_currentPageObject.hideHint != undefined && _currentPageObject.hideHint) {
@@ -480,7 +489,7 @@ var _Navigator = (function () {
                     _Assessment.ShowQuestion()
 
                     //this.UpdateProgressBar();
-                    if (gRecordData.Status != "Completed" && !presentermode) {
+                    if (gRecordData.Status != "Completed" && !this.IsPresenterMode()) {
                         $("#linknext").k_disable();
                         $("#linkprevious").k_disable();
                     }
@@ -592,7 +601,12 @@ var _Navigator = (function () {
             presentermode = val;
         },
         IsPresenterMode: function () {
-            return presentermode;
+            if(packageType == "presenter"){
+                return true;
+            }
+            else{
+                return false;
+            }
         },
         SetVideoStatus: function(){
             _NData[_currentPageId].played = true;
@@ -663,6 +677,8 @@ var _Navigator = (function () {
             }
         },
           SetBookMarkPage: function () {
+            if (!this.IsScorm() && !this.IsRevel())
+                return;
             if (this.IsScorm()) {
                 _ScormUtility.SetBookMark(bookmarkpageid);
             }
@@ -694,13 +710,13 @@ var _Navigator = (function () {
             return bookmarkpageid;
         },
         Initialize: function () {
-            if (isscorm) {
+            if (packageType == "scorm") {
                 _ScormUtility.Init();
                 _Navigator.SetBookmarkData();
                 //bookmarkpageid = _ScormUtility.GetBookMark();
                 this.GotoBookmarkPage();
             }
-            else if (isrevel) {
+            else if (packageType == "revel") {
                 g_tempIntv = setInterval(function () {
                     if ((typeof piSession != 'undefined' && typeof piSession.currentToken() != 'undefined' && piSession.currentToken() != null)) {
                         clearInterval(g_tempIntv);
@@ -746,17 +762,20 @@ var _Navigator = (function () {
             }
         },
         IsScorm: function () {
-            if (isscorm == true)
+            if (packageType == "scorm")
                 return true;
 
             return false;
 
         },
         IsRevel: function () {
-            if (isrevel == true)
+            if (packageType == "revel")
                 return true;
             return false;
-        }
+        },
+        GetPackageType: function () {
+            return packageType;
+        },
     };
 })();
 

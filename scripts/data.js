@@ -151,6 +151,21 @@ var _PData = {
     ImageHotSpots: {
       "Hotspots": [
         {
+          "HotspotId": 7,
+          "width": "22.8643216080402%",
+          "height": "13.06532663316583%",
+          "top": "67.16917922948073%",
+          "left": "15.263819095477388%",
+          "widthPX": "182px",
+          "heightPX": "82px",
+          "topPX": "401px",
+          "leftPX": "121.5px",
+          action: "feedback",
+          eventName: "dblclick",
+          correct: true,
+          accessText: "Country",
+        },
+        {
           "HotspotId": 1,
           "width": "22.236180904522612%",
           "height": "13.90284757118928%",
@@ -228,21 +243,6 @@ var _PData = {
           correct: false,
           accessText: "Comedy",
         },
-        {
-          "HotspotId": 7,
-          "width": "22.8643216080402%",
-          "height": "13.06532663316583%",
-          "top": "67.16917922948073%",
-          "left": "15.263819095477388%",
-          "widthPX": "182px",
-          "heightPX": "82px",
-          "topPX": "401px",
-          "leftPX": "121.5px",
-          action: "feedback",
-          eventName: "dblclick",
-          correct: true,
-          accessText: "Country",
-        }
       ],
       correctfeedback: "feedbackdata/feedbackp6c.htm",
     },
@@ -308,19 +308,6 @@ var _PData = {
     ImageHotSpots: {
       "Hotspots": [
         {
-          "HotspotId": 1,
-          "width": "22.8643216080402%",
-          "height": "16.750418760469014%",
-          "top": "17.252931323283082%",
-          "left": "15.766331658291458%",
-          "widthPX": "182px",
-          "heightPX": "104px",
-          "topPX": "103px",
-          "leftPX": "125.5px",
-          correct: false,
-          accessText: "Podcast",
-        },
-        {
           "HotspotId": 2,
           "width": "25.125628140703515%",
           "height": "17.252931323283082%",
@@ -334,6 +321,19 @@ var _PData = {
           eventName: "dblclick",
           correct: true,
           accessText: "Pop",
+        },
+        {
+          "HotspotId": 1,
+          "width": "22.8643216080402%",
+          "height": "16.750418760469014%",
+          "top": "17.252931323283082%",
+          "left": "15.766331658291458%",
+          "widthPX": "182px",
+          "heightPX": "104px",
+          "topPX": "103px",
+          "leftPX": "125.5px",
+          correct: false,
+          accessText: "Podcast",
         },
         {
           "HotspotId": 3,

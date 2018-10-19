@@ -464,7 +464,6 @@ var _ModuleCommon = (function () {
         },
 
         PresenterMode: function () {
-            debugger;
             var currentPageData = _Navigator.GetCurrentPage();
             var pageData = this.GetPageDetailData();
             var appendImage = $(".wrapperimage");
@@ -474,14 +473,6 @@ var _ModuleCommon = (function () {
                 $("input[type='text']").k_disable();
             }
             else {
-                /* if(hotspotLength > 1 && currentPageData.pageId == "p6" || currentPageData.pageId == "p10"){
-                     for(var i=0; i < hotspotLength; i++){
-                         if(pageData.ImageHotSpots.Hotspots[i].presenter){
-     
-                         }
-                     }
-                 }
-                 else{*/
                 var posObj = pageData.ImageHotSpots.Hotspots[0];
                 var _div = "<div class='reviewDiv Correct' style='z-index:5;width:39px;height:39px;position:absolute;left:" + posObj.left + ";top:" + posObj.top + ";'><img src='assets/images/review-correct.png' style='width:39px;height:35px;' /></div>";
                 if (currentPageData.pageId == "p6" || currentPageData.pageId == "p10") {

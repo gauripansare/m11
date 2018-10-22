@@ -7,6 +7,7 @@ var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator
 var CurClientWidth = window.innerWidth;
 var Macbrowser = navigator.userAgent.indexOf('Chrome');
 var Macos = navigator.userAgent.indexOf('Mac');
+var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 var isIpad = userAgentCustom.match(/iPad/i)
 var isIphone = (navigator.userAgent.match(/iPhone/i))

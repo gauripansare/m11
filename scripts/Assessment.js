@@ -64,7 +64,7 @@ var _Assessment = (function () {
 			if (gRecordData.Status == "NotStarted") {
 				gRecordData.Status = "Started";
 			}
-			$("#QuetionText").html("<span style='font-size:0px'>Question Number </span><span >" + (currentQuestionIndex + 1) + ") &nbsp;</span>" + currQustion.QuestionText)
+			$("#QuetionText").html("<span style='font-size:0px'>Question Number </span>"+(currentQuestionIndex + 1) +") "+ currQustion.QuestionText)
 			if (currQustion.UserSelectedOptionId == "") {
 				// randomize options
 				gRecordData.Questions[currentQuestionIndex].Options = this.Shuffle(currQustion.Options)
@@ -85,13 +85,17 @@ var _Assessment = (function () {
 					$("#" + currQustion.Options[i].OptionId).trigger("click");				
 					isFirstQAnswered = true
 				}
-				if (isIE11version || isIEEdge) {
+				if (isIE11version || isIEEdge || Macos) {
 					optionObj.find("input").attr("aria-label", optionObj.find(".inpputtext").text());
 					optionObj.find(".inpputtext").attr("aria-hidden", "true")
 				}
 			}
 			$("#Questioninfo").text("Performance Check: Mini-Quiz: Question " + parseInt(currentQuestionIndex + 1) + " of 4")
 			//removeCSS("styles/questionPlaceholder.css")
+			if(Macos){
+				$("#QuetionText").attr("aria-hidden","true");
+				$("#QuetionText").closest(".questioninnerwrapper").attr("aria-label","question number "+(currentQuestionIndex + 1) +") "+ currQustion.QuestionText);
+			}
 			$(".intro-content-question").fadeIn(600)
 
 			$("#Questioninfo").focus();

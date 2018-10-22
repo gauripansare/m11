@@ -425,6 +425,7 @@ var _Navigator = (function () {
                         else {
                             //$(".hintlink").hide();
                             $("div#hintdiv").hide();
+                            $(".hintcontainer").hide();
                         }
                         if (_Navigator.GetCurrentPage().hideHint != undefined && _Navigator.GetCurrentPage().hideHint) {
                             //$(".hintlink").hide();

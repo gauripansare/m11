@@ -92,7 +92,7 @@ var _Assessment = (function () {
 			}
 			$("#Questioninfo").text("Performance Check: Mini-Quiz: Question " + parseInt(currentQuestionIndex + 1) + " of 4")
 			//removeCSS("styles/questionPlaceholder.css")
-			if(Macos){
+			if(isSafari){
 				$("#QuetionText").attr("aria-hidden","true");
 				$("#QuetionText").closest(".questioninnerwrapper").attr("aria-label","question number "+(currentQuestionIndex + 1) +") "+ currQustion.QuestionText);
 			}

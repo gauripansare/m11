@@ -602,7 +602,7 @@ var _Navigator = (function () {
             return _NData[pageid].isLoaded != undefined && _NData[pageid].isLoaded ? true : false;
         },
         SetPresenterMode: function (val) {
-            presentermode = val;
+            packageType = val;
         },
         IsPresenterMode: function () {
             if(packageType == "presenter"){

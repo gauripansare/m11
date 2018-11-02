@@ -64,7 +64,7 @@ $(document).on("click", ".divHotSpot", function (event) {
     },400)
 });*/
 
-var count = "0";
+
 $(document).on("click", ".divHotSpotdbl", function (event) {
     if (_Navigator.IsPresenterMode()) {
         return;
@@ -75,8 +75,34 @@ $(document).on("click", ".divHotSpotdbl", function (event) {
     }
     else {
         event.preventDefault();
-        count++;
-        if (count == 2) {
+        $(this).k_disable()
+        if (hotspotclicked || _Navigator.IsAnswered())
+            return;
+        $(this).addClass("hotspotclicked")
+        hotspot = $(this);
+        setTimeout(function () {
+            hotspotclicked = false;
+            _ModuleCommon.HotspotClick(hotspot, event);
+        }, 400);
+        count = 0;
+
+    }
+});
+$(document).on("keyup", ".divHotSpotdbl", function (event) {
+    if (_Navigator.IsPresenterMode()) {
+        return;
+    }
+    if ($(this).attr("disabled") || $(this).hasClass("disabled")) {
+        event.preventDefault();
+        return;
+    } else {
+        event.preventDefault();
+        if (window.event) {
+            key = window.event.keyCode;
+        } else if (event) {
+            key = event.keyCode;
+        }
+        if (key == 13) {
             $(this).k_disable()
             if (hotspotclicked || _Navigator.IsAnswered())
                 return;
@@ -86,8 +112,8 @@ $(document).on("click", ".divHotSpotdbl", function (event) {
                 hotspotclicked = false;
                 _ModuleCommon.HotspotClick(hotspot, event);
             }, 400);
-            count = 0;
         }
+
     }
 });
 
@@ -132,6 +158,9 @@ $(document).on("click", ".hintlink", function (event) {
             $(".hintlink").addClass("expanded");
             $(".hintlink").attr("aria-expanded", "true");
             $(".hintcontainer .hintcontent").find("p:first").attr("tabindex", "-1")
+            if (iOS) {
+                $(".hintcontainer .hintcontent").find("p:first").attr("role", "text")
+            }
             $(".hintcontainer .hintcontent").find("p:first").focus();
         });
     }

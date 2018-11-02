@@ -452,7 +452,7 @@ var _ModuleCommon = (function () {
                             ptop = getPerc(Number(hotspotdata.Hotspots[i].top.replace("px", "").replace("%", "")), orh) + "%";
                         }
                         var eventname = hotspotdata.Hotspots[i].eventName;
-                        if (eventname != undefined) {
+                        if (eventname != undefined  && !isAndroid && !isIOS) {
                             htmlForDivHotspotImage += "<button type='button' hsId='" + hsId + "'  id='divHotspots" + i + "_" + hsId + "' class='divHotSpotdbl divHotSpotCommon' style=' width:" + pwdth + ";height:" + phight + ";left:" + pleft + ";top:" + ptop + ";' action='" + hotspotdata.Hotspots[i].action + "' role='button' aria-label='" + accessText + "'/>";
                         }
                         else {
@@ -588,6 +588,9 @@ var _ModuleCommon = (function () {
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
                 // this.SetFeedbackTop()   
                 $("#div_feedback p:first").attr("tabindex", "-1")
+                if (iOS) {
+                    $("#div_feedback p:first").attr("role", "text")
+                }
                 $('html,body').animate({ scrollTop: document.body.scrollHeight }, 1000, function () {
                     $("#div_feedback p:first").focus();
                 });
@@ -619,6 +622,9 @@ var _ModuleCommon = (function () {
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
                 // this.SetFeedbackTop()   
                 $("#div_feedback p:first").attr("tabindex", "-1")
+                if (iOS) {
+                    $("#div_feedback p:first").attr("role", "text")
+                }
                 $('html,body').animate({ scrollTop: document.body.scrollHeight }, 1000, function () {
                     $("#div_feedback p:first").focus();
                 });

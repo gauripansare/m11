@@ -370,7 +370,7 @@ var _Navigator = (function () {
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad();
-                    $("#titleheader").focus();
+                    $("h1.pageheading").focus();
                 });
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {

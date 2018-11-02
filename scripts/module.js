@@ -10,7 +10,7 @@ var Macos = navigator.userAgent.indexOf('Mac');
 var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 var isIpad = userAgentCustom.match(/iPad/i)
-var isIphone = (navigator.userAgent.match(/iPhone/i))
+var isIphone = navigator.userAgent.indexOf('iPhone') > -1
 var isIEEdge = /Edge/.test(navigator.userAgent)
 var isFirefox = /Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)
 jQuery.fn.extend({
@@ -727,12 +727,17 @@ var _ModuleCommon = (function () {
         VideoQuery: function () {
             $(".activityvideo").hide();
             $(".slidImgStyle").show();
-            $(".imgAnimate").animate({
-                right: "-400px"
-            }, {
-                    queue: false,
-                    complete: function () { }
-                });
+            if(!isAndroid && !isIphone){
+                $(".imgAnimate").animate({
+                    right: "-400px"
+                }, {
+                        queue: false,
+                        complete: function () { }
+                    });
+            }
+            if(isIphone || isAndroid){
+                $(".vpwrapperimage .imgAnimate").css('right', '0px');
+            }
         },
 
         AppendFooter: function () {

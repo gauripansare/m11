@@ -103,9 +103,16 @@
     position: relative;
     display:flexbox;
     justify-content:center;
-    overflow: hidden
+    /*overflow: hidden*/
 }
-
+.vpwrapperimage {
+    width: 798px;
+    height: auto;
+    position: relative;
+    display:flexbox;
+    justify-content:center;
+    /*overflow: hidden*/
+}
 .activityimg {
     width: 796px;
     border:1px solid #cccccc;
@@ -241,6 +248,7 @@
 .activityvideo {
     height: 100%;
     width: 100%;
+    overflow : auto;
 }
 
 #p17textentryreview1val1 {
@@ -317,7 +325,10 @@
     font-size: 12px;
 }
 
-.inputcircle{
+
+/*assessment css */
+
+.questioninnerwrapper .inputcircle, #Summary .inputcircle {
     position: relative;
     padding-left: 6px;
     cursor: pointer;
@@ -344,8 +355,8 @@
     -webkit-box-sizing: border-box;
 }
 
-.assessmentradio:checked + .inputcircle:before {
-    content: '';   
+    .assessmentradio:checked + .inpputtext .inputcircle:before {
+    content: '';
     height: 15px;
     width: 15px;
     position: absolute;
@@ -357,8 +368,9 @@
     -moz-border-radius: 100%;
     -webkit-border-radius: 100%;
 }
-.assessmentradio:checked + .inputcircle {
-    color: #047a9c;
+
+    .assessmentradio:checked + .inpputtext .inputcircle, #Summary .assessmentradio:checked + .inpputtext .inputcircle {
+    color: #047a9c !important;
 }
 #questioninnerwrapper.inputcircle , #Summary.inputcircle {
     position: relative;
@@ -439,11 +451,15 @@ position: absolute;
 .question-band{
     float: left;
     margin-left: 8%;
+    position: relative;
 }
 .quetiontext{
     margin-left: 20px;
 }
-
+.inpputtext{
+    display: block;
+    margin: 5px 0;
+}
 /*Presenter Mode css start*/
 .presentationModeFooter {
     display: inline-block;
@@ -469,10 +485,8 @@ position: absolute;
     top: 0px;
 }
 
-
-
-
-
-
-  
-
+.Accessibility{
+    position: absolute !important;
+    opacity: 0;
+    font-size: 0px !important;
+}

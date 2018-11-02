@@ -10,6 +10,7 @@ var _Navigator = (function () {
     var totalsimscore = 18;
     //var presentermode = false;
     var bookmarkpageid = "";
+    var quizpageid = "p26";
     var _NData = {
         "p1": {
             pageId: "p1",
@@ -348,6 +349,7 @@ var _Navigator = (function () {
             }
             if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity && !this.IsAnswered()) {
                 $("#linknext").k_disable();
+                $('#submitbtn').k_disable();
             }
             if (this.IsAnswered() || _currentPageObject.played) {
                 $("#linknext").k_enable();
@@ -368,8 +370,7 @@ var _Navigator = (function () {
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad();
-                    //setReader("header1");
-                    $("#header1").focus();
+                    $("#titleheader").focus();
                 });
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {
@@ -382,14 +383,14 @@ var _Navigator = (function () {
                                     $("#titleheader").focus();
                                 }
                                 else {
-                                    if (_currentPageId != "p26") {
+                                    if (_currentPageId != quizpageid) {
                                         $("#progressdiv").focus();
                                     }
                                     else {
                                         $("#Questioninfo").focus();
                                     }
                                 }
-                                if (_Navigator.IsPresenterMode() && (_currentPageObject.pageId !="p26" || _currentPageObject.pageId !="summary" || !_currentPageObject.hasVideo )) {
+                                if (_Navigator.IsPresenterMode() && (_currentPageObject.pageId !=quizpageid || _currentPageObject.pageId !="summary" || !_currentPageObject.hasVideo )) {
                                     _ModuleCommon.PresenterMode();
                                 }
 
@@ -399,7 +400,7 @@ var _Navigator = (function () {
                             OnPageLoad();
                         }
 
-                        if (_currentPageId == "p26")//  change to assessment id
+                        if (_currentPageId == quizpageid)//  change to assessment id
                         {
                             _Assessment.ShowQuestion();
                         }
@@ -435,6 +436,12 @@ var _Navigator = (function () {
                             $("div#hintdiv").hide();
                         }
                         _NData[_currentPageObject.pageId].isLoaded = true;
+                        if (_currentPageObject.pageId == "p2")
+                            $("#titleheader").focus();
+                        else if(_currentPageObject.pageId == quizpageid)
+                            $(".pageheading").focus();
+                        else
+                            $("#progressdiv").focus();
 
                         _Navigator.GetBookmarkData();
                     });
@@ -465,7 +472,7 @@ var _Navigator = (function () {
             if (_Navigator.IsRevel()) {
                 LifeCycleEvents.OnInteraction("Previous link click.")
             }
-            if (_currentPageObject.pageId == "p26" && typeof (currentQuestionIndex) != 'undefined' && currentQuestionIndex > 0) {
+            if (_currentPageObject.pageId == quizpageid && typeof (currentQuestionIndex) != 'undefined' && currentQuestionIndex > 0) {
                 $("#ReviewIns").hide();
                 $(".intro-content-question").show();
                 $("#Questioninfo").show();
@@ -485,7 +492,7 @@ var _Navigator = (function () {
             }
             $("#linkprevious").k_enable();
             
-            if (_currentPageObject.pageId == "p26") {
+            if (_currentPageObject.pageId == quizpageid) {
 
                 if (typeof (currentQuestionIndex) != 'undefined' && typeof (gRecordData.Questions) != 'undefined' && (currentQuestionIndex + 1) < gRecordData.Questions.length) {
                     currentQuestionIndex = currentQuestionIndex + 1

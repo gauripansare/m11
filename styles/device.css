@@ -213,6 +213,7 @@
 @media screen and (max-width: 445px) {
     .intro-content {
         margin: 0% 2%;
+        overflow: auto;
     }
 
     #radio-elements label + label {

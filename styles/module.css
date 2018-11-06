@@ -394,6 +394,8 @@ position: absolute;
 .iscorrect{
     position: absolute;
     left: -43px;
+    display: block ! important;
+    padding-top: 4px;
 }
 .summaryquestion{
     margin-bottom: 20px;

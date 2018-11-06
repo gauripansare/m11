@@ -91,7 +91,7 @@ var _Assessment = (function () {
 				}
 			}
       $(".question-band .assessmentradio").unwrap();
-			$("#Questioninfo").text("Performance Check: Mini-Quiz: Question " + parseInt(currentQuestionIndex + 1) + " of 5")
+			$("#Questioninfo").text("Performance Check: Mini-Quiz: Question " + parseInt(currentQuestionIndex + 1) + " of 4")
 			//removeCSS("styles/questionPlaceholder.css")
 			if(isSafari && !iOS){
 				$("#QuetionText").attr("aria-hidden","true");
@@ -305,10 +305,11 @@ var _Assessment = (function () {
 					radioalabel = $(this).next(".inpputtext").text();
 				}
 				radioalabel = ischecked + radioalabel;
-				radioalabel = "<label class='accessibility'>"+radioalabel+"</label>";
+				radioalabel = "<label class='Accessibility'>"+radioalabel+"</label>";
 				$(this).prev(".iscorrect").before(radioalabel);
 				$(this).attr("aria-hidden", "true");
 				$(this).next().attr("aria-hidden", "true");
+				$(this).attr("disabled", "true");
 
 			})
 		},

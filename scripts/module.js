@@ -18,7 +18,11 @@ jQuery.fn.extend({
         return this.removeClass('disabled').attr("aria-disabled", "false").removeAttr("disabled");
     },
     k_disable: function () {
-        return this.addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
+        this.addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
+        if (isIE11version) {
+            $(this).removeAttr("disabled")
+        }
+        return;
     },
     k_IsDisabled: function () {
         if (this.hasClass('disabled')) { return true; } else { return false; }
@@ -428,6 +432,9 @@ var _ModuleCommon = (function () {
                 $('#footer-navigation').css('display', 'table');
             }
             $("h2.pageheading").attr("tabindex", "-1");
+            if (isIE11version) {
+                $(".hintlink").css("padding-left", "68px");
+            }
         },
 
         LoadHotSpot: function () {
@@ -452,7 +459,7 @@ var _ModuleCommon = (function () {
                             ptop = getPerc(Number(hotspotdata.Hotspots[i].top.replace("px", "").replace("%", "")), orh) + "%";
                         }
                         var eventname = hotspotdata.Hotspots[i].eventName;
-                        if (eventname != undefined  && !isAndroid && !isIOS) {
+                        if (eventname != undefined && !isAndroid && !isIOS) {
                             htmlForDivHotspotImage += "<button type='button' hsId='" + hsId + "'  id='divHotspots" + i + "_" + hsId + "' class='divHotSpotdbl divHotSpotCommon' style=' width:" + pwdth + ";height:" + phight + ";left:" + pleft + ";top:" + ptop + ";' action='" + hotspotdata.Hotspots[i].action + "' role='button' aria-label='" + accessText + "'/>";
                         }
                         else {
@@ -733,7 +740,7 @@ var _ModuleCommon = (function () {
         VideoQuery: function () {
             $(".activityvideo").hide();
             $(".slidImgStyle").show();
-            if(!isAndroid && !isIphone){
+            if (!isAndroid && !isIphone) {
                 $(".imgAnimate").animate({
                     right: "-400px"
                 }, {
@@ -741,7 +748,7 @@ var _ModuleCommon = (function () {
                         complete: function () { }
                     });
             }
-            if(isIphone || isAndroid){
+            if (isIphone || isAndroid) {
                 $(".vpwrapperimage .imgAnimate").css('right', '0px');
             }
         },

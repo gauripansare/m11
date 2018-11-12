@@ -324,8 +324,8 @@ var _Navigator = (function () {
 
         LoadPage: function (pageId, jsonObj) {
             $(".hintcontainer").hide();
-            if (_Navigator.IsRevel() && _currentPageId !=undefined && _currentPageId !="") {
-               LifeCycleEvents.OnUnloadFromPlayer()
+            if (_Navigator.IsRevel() && _currentPageId != undefined && _currentPageId != "") {
+                LifeCycleEvents.OnUnloadFromPlayer()
             }
             bookmarkpageid = pageId;
             if (jsonObj == undefined) {
@@ -390,13 +390,13 @@ var _Navigator = (function () {
                                         $("#Questioninfo").focus();
                                     }
                                 }
-                                if (_Navigator.IsPresenterMode() && (_currentPageObject.pageId !=quizpageid || _currentPageObject.pageId !="summary" || !_currentPageObject.hasVideo )) {
+                                if (_Navigator.IsPresenterMode() && (_currentPageObject.pageId != quizpageid || _currentPageObject.pageId != "summary" || !_currentPageObject.hasVideo)) {
                                     _ModuleCommon.PresenterMode();
                                 }
 
                             });
                         }
-                        else{
+                        else {
                             OnPageLoad();
                         }
 
@@ -407,11 +407,11 @@ var _Navigator = (function () {
                         if (_Navigator.GetCurrentPage().hasVideo && !_Navigator.IsAnswered()) {
                             $('html,body').animate({ scrollTop: document.body.scrollHeight }, 1000, function () { });
                         }
-                        if (_Navigator.GetCurrentPage().hasVideo && _Navigator.IsPresenterMode()){
+                        if (_Navigator.GetCurrentPage().hasVideo && _Navigator.IsPresenterMode()) {
                             _Navigator.SetPageStatus(true);
                             _Navigator.UpdateProgressBar();
                         }
-                        if (_Navigator.GetCurrentPage().pageId == "p17" && _Navigator.IsPresenterMode()){
+                        if (_Navigator.GetCurrentPage().pageId == "p17" && _Navigator.IsPresenterMode()) {
                             _Navigator.SetPageStatus(true);
                             _Navigator.UpdateProgressBar();
                         }
@@ -438,7 +438,7 @@ var _Navigator = (function () {
                         _NData[_currentPageObject.pageId].isLoaded = true;
                         if (_currentPageObject.pageId == "p2")
                             $("#titleheader").focus();
-                        else if(_currentPageObject.pageId == quizpageid)
+                        else if (_currentPageObject.pageId == quizpageid)
                             $(".pageheading").focus();
                         else
                             $("#progressdiv").focus();
@@ -450,7 +450,7 @@ var _Navigator = (function () {
 
             if (_Navigator.IsRevel()) {
                 LifeCycleEvents.OnLoadFromPlayer()
-             }
+            }
 
         },
         LoadDefaultQuestion: function () {
@@ -491,7 +491,7 @@ var _Navigator = (function () {
                 LifeCycleEvents.OnInteraction("Next link click.")
             }
             $("#linkprevious").k_enable();
-            
+
             if (_currentPageObject.pageId == quizpageid) {
 
                 if (typeof (currentQuestionIndex) != 'undefined' && typeof (gRecordData.Questions) != 'undefined' && (currentQuestionIndex + 1) < gRecordData.Questions.length) {
@@ -612,14 +612,14 @@ var _Navigator = (function () {
             packageType = val;
         },
         IsPresenterMode: function () {
-            if(packageType == "presenter"){
+            if (packageType == "presenter") {
                 return true;
             }
-            else{
+            else {
                 return false;
             }
         },
-        SetVideoStatus: function(){
+        SetVideoStatus: function () {
             _NData[_currentPageId].played = true;
         },
         SetNextPageId: function (nextpageid) {
@@ -639,7 +639,7 @@ var _Navigator = (function () {
             this.GetBookmarkData();
 
         },
-         GetBookmarkData: function () {
+        GetBookmarkData: function () {
             if (!this.IsScorm() && !this.IsRevel())
                 return;
             var bookmarkobj = {}
@@ -664,9 +664,9 @@ var _Navigator = (function () {
             var gVisistedPages = [];
             for (var i in _NData) {
                 if (_NData[i].isAnswered || _NData[i].hasVideo) {
-                    if(_NData[i].hasVideo){
+                    if (_NData[i].hasVideo) {
                         gVisistedPages.push({ id: _NData[i].pageId, prev: _NData[i].prevPageId, next: _NData[i].nextPageId, played: _NData[i].played })
-                    }else{
+                    } else {
                         gVisistedPages.push({ id: _NData[i].pageId, prev: _NData[i].prevPageId, next: _NData[i].nextPageId })
                     }
                 }
@@ -675,19 +675,19 @@ var _Navigator = (function () {
         },
         SetNavigatorBMData: function (gVisistedPages) {
             for (var i = 0; i < gVisistedPages.length; i++) {
-                if(_NData[gVisistedPages[i].id].hasVideo  ){
-                    if( _NData[gVisistedPages[i].id].played != undefined &&  _NData[gVisistedPages[i].id].played )
-                    _NData[gVisistedPages[i].id].isAnswered = gVisistedPages[i].played;
+                if (_NData[gVisistedPages[i].id].hasVideo) {
+                    if (_NData[gVisistedPages[i].id].played != undefined && _NData[gVisistedPages[i].id].played)
+                        _NData[gVisistedPages[i].id].isAnswered = gVisistedPages[i].played;
                     _NData[gVisistedPages[i].id].played = gVisistedPages[i].played;
                 }
-                else{
+                else {
                     _NData[gVisistedPages[i].id].isAnswered = true;
                 }
                 _NData[gVisistedPages[i].id].prevPageId = gVisistedPages[i].prev;
                 _NData[gVisistedPages[i].id].nextPageId = gVisistedPages[i].next;
             }
         },
-          SetBookMarkPage: function () {
+        SetBookMarkPage: function () {
             if (!this.IsScorm() && !this.IsRevel())
                 return;
             if (this.IsScorm()) {
@@ -699,15 +699,13 @@ var _Navigator = (function () {
         },
         SetBookmarkData: function () {
             var bookmarkdata;
-            if(this.IsScorm())
-            {
+            if (this.IsScorm()) {
                 bookmarkdata = _ScormUtility.GetSuspendData();
             }
-            else if(this.IsRevel())
-            {
+            else if (this.IsRevel()) {
                 bookmarkdata = JSON.stringify(k_Revel.get_StateData())
             }
-            
+
             if (bookmarkdata != undefined && bookmarkdata != "") {
                 bookmarkdata = JSON.parse(bookmarkdata);
                 bookmarkpageid = bookmarkdata.BMPageId;
@@ -758,13 +756,12 @@ var _Navigator = (function () {
                 }, 100);
 
             }
-            else
-            {
+            else {
                 _Navigator.Start();
             }
         },
         GotoBookmarkPage: function () {
-           
+
             if (bookmarkpageid != undefined && bookmarkpageid != "") {
                 _Navigator.LoadPage(bookmarkpageid)
             }

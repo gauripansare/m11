@@ -598,7 +598,7 @@ var _ModuleCommon = (function () {
             var fdbkUrl = _Settings.dataRoot + "feedbackdata/" + pageData.EmbedSettings.feedbackurl;
             $("input").k_disable();
             $("#div_feedback").show();
-            $("#div_feedback").css("display", "block");
+            $("#div_feedback").css("display", "inline-block");
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
                 // this.SetFeedbackTop()   
                 $("#div_feedback .div_fdkcontent p:first").attr("tabindex", "-1")
@@ -642,7 +642,7 @@ var _ModuleCommon = (function () {
             $("input").k_disable();
             $(".divHotSpot").k_disable();
             $("#div_feedback").show();
-            $("#div_feedback").css("display", "block");
+            $("#div_feedback").css("display", "inline-block");
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
                 // this.SetFeedbackTop()   
                 $("#div_feedback .div_fdkcontent p:first").attr("tabindex", "-1")

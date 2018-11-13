@@ -211,7 +211,7 @@ $(document).on('click', ".activityimg", function (event) {
 
 $(document).on('click', "#start", function (event) {
     _Navigator.Next();
-    //_Navigator.LoadPage("p26")
+    //_Navigator.LoadPage("p3")
 });
 
 $(document).on('click', ".reviewsubmit", function (event) {

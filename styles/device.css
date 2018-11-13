@@ -96,6 +96,10 @@
     .question-band{
         margin-left: 13%;
     }
+    .activity{
+        /*height: 600px;*/
+        overflow: scroll;
+    }
 }
 
 @media screen and (max-width : 500px) {

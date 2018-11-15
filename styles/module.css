@@ -185,6 +185,10 @@
     color: #01662C;
     font-weight: bold;
 }
+.redspan {
+    color: #B22222;
+    font-weight: bold;
+}
 
 .start-btn {
     width: 100%;
@@ -336,7 +340,6 @@
     left: -22px;
 }
     
-/*assessment css */
 .inputcircle:after {
     content: '';
     width: 23px;
@@ -462,7 +465,10 @@ position: absolute;
     display: block;
     margin: 5px 0;
 }
-/*Presenter Mode css start*/
+#Summary .inpputtext{
+   margin: 0px;
+}
+   /*Presenter Mode css start*/
 .presentationModeFooter {
     display: inline-block;
     background-color: #1a76cb;
@@ -470,6 +476,10 @@ position: absolute;
     width: 100%;
     color: white;
     text-align: center;
+}
+.accessibility{
+    font-size: 0;
+    opacity: 0;
 }
 /*presenter Mode css End*/
 

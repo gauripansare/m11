@@ -3,7 +3,7 @@
 //This api will contain navigation logic and page load.
 //It will also handle the question navigation if the page is having multiple questions.
 var _Navigator = (function () {
-    var packageType = "";//presenter/scorm/revel
+    var packageType = "presenter";//presenter/scorm/revel
     var _currentPageId = "";
     var _currentPageObject = {};
     var progressLevels = [26];
@@ -324,6 +324,7 @@ var _Navigator = (function () {
 
         LoadPage: function (pageId, jsonObj) {
             $(".hintcontainer").hide();
+             $(".header-content-dock").css({"visibility":"hidden"});
             if (_Navigator.IsRevel() && _currentPageId != undefined && _currentPageId != "") {
                 LifeCycleEvents.OnUnloadFromPlayer()
             }
@@ -338,6 +339,7 @@ var _Navigator = (function () {
             $("#header-title").show();
             $("footer").show();
 
+            $('html,body').css({ scrollTop: 0 })
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();
@@ -391,7 +393,7 @@ var _Navigator = (function () {
                                         $("#Questioninfo").focus();
                                     }
                                 }
-                                if (_Navigator.IsPresenterMode() && (_currentPageObject.pageId != quizpageid || _currentPageObject.pageId != "summary" || !_currentPageObject.hasVideo)) {
+                                if (_Navigator.IsPresenterMode() && (_currentPageObject.pageId != quizpageid || !_currentPageObject.hasVideo)) {
                                     _ModuleCommon.PresenterMode();
                                 }
 
@@ -552,7 +554,7 @@ var _Navigator = (function () {
         UpdateProgressBar: function () {
             var progData = this.GetProgressData();
             var lprog_pecent = (progData * 100 / progressLevels[0]).toFixed(0);
-            $(".progressDiv").text("Progress: " + lprog_pecent + "%");
+            $(".progressdiv").text("Progress: " + lprog_pecent + "%");
             $(".progressFg").css("width", lprog_pecent + "%");
 
 
@@ -785,10 +787,13 @@ var _Navigator = (function () {
         GetPackageType: function () {
             return packageType;
         },
+        GetQuizPageId:function(){
+            return quizpageid;
+        }
     };
 })();
 
-
+    
 
 function setReader(idToStartReading) {
     $('#hiddenAnchor').attr("href", "#" + idToStartReading)

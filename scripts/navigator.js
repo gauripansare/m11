@@ -3,7 +3,7 @@
 //This api will contain navigation logic and page load.
 //It will also handle the question navigation if the page is having multiple questions.
 var _Navigator = (function () {
-    var packageType = "presenter";//presenter/scorm/revel
+    var packageType = "";//presenter/scorm/revel
     var _currentPageId = "";
     var _currentPageObject = {};
     var progressLevels = [26];
@@ -382,17 +382,25 @@ var _Navigator = (function () {
                         if ($(".activityimg").length > 0) {
                             $('.activityimg').load(function () {
                                 OnPageLoad();
+                                debugger
                                 if (_currentPageObject.pageId == "p2") {
                                     $("#titleheader").focus();
                                 }
+                                else if ((isIphone || isAndroid) && _NData[_currentPageId].isLoaded != undefined && _NData[_currentPageId].isLoaded == true) {//iphone android on previous focus is set to header
+                                    $("h2").focus();
+                                }
                                 else {
-                                    if (_currentPageId != quizpageid) {
-                                        $("#progressdiv").focus();
+                                    //$(".header-informarion .hintlink").focus();
+                                    //$("h2").focus();
+                                    if (isChrome && !isAndroid) {
+                                        $("h2").focus();
                                     }
                                     else {
-                                        $("#Questioninfo").focus();
+                                        $("#progressdiv").focus();
                                     }
+                                    // setReader("progressdiv");
                                 }
+                                _NData[_currentPageObject.pageId].isLoaded = true;
                                 if (_Navigator.IsPresenterMode() && (_currentPageObject.pageId != quizpageid || !_currentPageObject.hasVideo)) {
                                     _ModuleCommon.PresenterMode();
                                 }
@@ -408,7 +416,12 @@ var _Navigator = (function () {
                             _Assessment.ShowQuestion();
                         }
                         if (_Navigator.GetCurrentPage().hasVideo && !_Navigator.IsAnswered()) {
-                            $('html,body').animate({ scrollTop: document.body.scrollHeight }, 1000, function () { });
+                            $('html,body').animate({ scrollTop: document.body.scrollHeight }, 1000, function () {
+                                $("h2").focus();
+                            });
+                        }
+                        if(_Navigator.GetCurrentPage().hasVideo && _Navigator.GetCurrentPage().isLoaded){
+                            $("h2").focus();
                         }
                         if (_Navigator.GetCurrentPage().hasVideo && _Navigator.IsPresenterMode()) {
                             _Navigator.SetPageStatus(true);
@@ -438,14 +451,6 @@ var _Navigator = (function () {
                             //$(".hintlink").hide();
                             $("div#hintdiv").hide();
                         }
-                        _NData[_currentPageObject.pageId].isLoaded = true;
-                        if (_currentPageObject.pageId == "p2")
-                            $("#titleheader").focus();
-                        else if (_currentPageObject.pageId == quizpageid)
-                            $(".pageheading").focus();
-                        else
-                            $("#progressdiv").focus();
-
                         _Navigator.GetBookmarkData();
                     });
                 })

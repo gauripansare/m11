@@ -64,7 +64,8 @@ var _Assessment = (function () {
 			if (gRecordData.Status == "NotStarted") {
 				gRecordData.Status = "Started";
 			}
-			$("#QuetionText").html("<span style='font-size:0px'>Question Number </span>" + (currentQuestionIndex + 1) + ") " + currQustion.QuestionText)
+			$("#QuetionText").html("<span style='font-size:0px'>Question Number </span>" + (currentQuestionIndex + 1) + ") " + currQustion.QuestionText);
+			$("#QuetionText").attr("tabindex", "-1");
 			if (currQustion.UserSelectedOptionId == "") {
 				// randomize options
 				gRecordData.Questions[currentQuestionIndex].Options = this.Shuffle(currQustion.Options)
@@ -240,7 +241,7 @@ var _Assessment = (function () {
 					questionObj.find(".question-band").append(optionObj)
 
 				}
-				if(_Navigator.IsPresenterMode()){
+				if (_Navigator.IsPresenterMode()) {
 					feedbacktext = currQustion.CorrectFeedback;
 				}
 				var fdk = $(".questionfdk").clone();
@@ -268,11 +269,15 @@ var _Assessment = (function () {
 				this.SetCustomarialabelforRadio();
 
 			}
+			if (gRecordData.Score == undefined || gRecordData.Score == "") {
+				gRecordData.Score = score;
+			}
+			var perscore = gRecordData.Score / parseInt(gRecordData.AssessmentScore) * 100;
+			$("#ScoreSummary").text("Score: " + perscore + "%");
 			if (gRecordData.Status == "Started") {
 				gRecordData.Status = "Completed";
 				gRecordData.Score = score;
-				var perscore = gRecordData.Score / parseInt(gRecordData.AssessmentScore) * 100;
-				$("#ScoreSummary").text("Score: " + perscore + "%");
+
 				this.SetScore(perscore);
 			}
 			if (_Navigator.IsPresenterMode()) {
@@ -280,7 +285,12 @@ var _Assessment = (function () {
 				gRecordData.Status = "Completed";
 			}
 			_Navigator.UpdateProgressBar();
-			$("#progressdiv").focus();
+			if (isChrome && !isAndroid) {
+				$("h2").focus();
+			}
+			else {
+				$("#progressdiv").focus();
+			}
 		},
 		SetScore: function (perscore) {
 			if (_Navigator.IsScorm()) {

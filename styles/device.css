@@ -6,20 +6,18 @@
         margin-left: 9% !important;
     }
 }
-@media screen and (max-width : 1024px) {
 
+@media screen and (max-width : 1024px) {
 }
 
 @media screen and (max-width:940px) {
-
 }
 
 @media screen and (max-width: 912px) {
     .intro-content {
         margin: 0% 9%;
     }
-    
-    .question-band{
+    .question-band {
         margin-left: 9%;
     }
 }
@@ -28,12 +26,10 @@
     .intro-content {
         margin: 0% 8%;
     }
-   
-    .question-band{
+
+    .question-band {
         margin-left: 9%;
     }
-    
-
 }
 
 @media screen and (max-width: 880px) {
@@ -93,14 +89,17 @@
         h2.pageheading{
         margin:0 4%;
     }
+    h1.pageheading{
+        margin:17px 4%;
+    }
+    .fa-check-incorrect {
+        bottom: 10px;
+    }
     .question-band{
         margin-left: 13%;
     }
-    .activity{
-        /*height: 600px;*/
-        overflow: scroll;
-    }
 }
+
 
 @media screen and (max-width : 500px) {
     h1 {
@@ -165,7 +164,7 @@
     }
     .header-content-dock .progressdiv{
         margin-top:4px;
-    }
+        margin-left:1px    }
 
     .header-content-dock .hintlinkspan{
         vertical-align: super;
@@ -204,7 +203,9 @@
     #radio-elements img {
         width: 85%;
     }
-
+    .summary-content {
+        margin: 0 11% !important;
+    }
 
     #footer-navigation .previous, #footer-navigation .next {
         /*margin-top: 2%;
@@ -215,9 +216,7 @@
     #footer-div {
         margin-left: 5%;
     }
-        .summary-content {
-        margin: 0 11% !important;
-    }
+
     .question-band{
         margin-left: 19%;
     }
@@ -227,9 +226,10 @@
 @media screen and (max-width: 445px) {
     .intro-content {
         margin: 0% 2%;
-        overflow: auto;
     }
-
+    h1.pageheading {
+        margin: 17px 2%;
+    }
     #radio-elements label + label {
         margin-left: 5%;
     }

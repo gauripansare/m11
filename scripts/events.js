@@ -143,7 +143,6 @@ $(document).on("click", "#linknext", function (event) {
     _Navigator.Next();
 });
 $(document).on("click", ".hintdoc", function (event) {
-    debugger;
     if ($(this).hasClass("hintdoc")) {
         if ($(this).hasClass("expanded")) {
             $(this).removeClass("expanded")
@@ -238,8 +237,6 @@ $(document).on("keydown", "input.EmbededElement", function (event) {
 $(window).resize(function () {
     _ModuleCommon.OrientationChange();
 });
-
-
 
 $(document).on('click', ".activityimg", function (event) {
     if ($(".divHotSpot").hasClass("disabled") || $(".divHotSpot").length == 0)

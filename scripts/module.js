@@ -512,7 +512,6 @@ var _ModuleCommon = (function () {
                         $("#div_feedback").css("display", "inline-block");
                         $("#div_feedback .div_fdkcontent").load(_Settings.dataRoot + pageData.ImageHotSpots.correctfeedback, function () {
                             $("#div_feedback p:first").attr("tabindex", "-1")
-                            $("#div_feedback p:first").attr("role", "text");
                             if (isIOS) {
                                 $("#div_feedback p:first").attr("role", "text");
                             }
@@ -664,8 +663,9 @@ var _ModuleCommon = (function () {
             $("#div_feedback").show();
             $("#div_feedback").css("display", "inline-block");
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
-                // this.SetFeedbackTop()   
-                $("#div_feedback .div_fdkcontent p:first").attr("tabindex", "-1")
+                // this.SetFeedbackTop()
+                    $("#div_feedback .div_fdkcontent p:first").attr("tabindex", "-1")
+
                 if (iOS) {
                     $("#div_feedback p:first").attr("role", "text")
                 }
@@ -769,7 +769,6 @@ var _ModuleCommon = (function () {
             if (_Navigator.IsPresenterMode()) {
                 $("#linknext").k_enable();
             }
-
         },
 
         VideoQuery: function () {

@@ -96,7 +96,10 @@
 .pageheading{
     margin: 0 10%;
 }
-
+.score {
+    font-size:16px;
+    margin-left: -18px;
+}
 .wrapperimage {
     width: 798px;
     height: auto;
@@ -501,4 +504,14 @@ position: absolute;
     position: absolute !important;
     opacity: 0;
     font-size: 0px !important;
+}
+
+.overflow-wrap {
+    overflow-wrap: break-word;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .hintlink{
+        left: 66%;
+    }
 }

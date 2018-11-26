@@ -309,6 +309,9 @@ var _Navigator = (function () {
         if ((_currentPageObject.pageId == "p3" || _currentPageObject.pageId == "p7" || _currentPageObject.pageId == "p14" || _currentPageObject.pageId == "p25") && (isIpad || isIphone || isSafari)) {
             $(".activityvideo").attr("controls", "true");
         }
+        if(Macos != -1 && isSafari && _currentPageObject.pageId == "p3" && !(isIpad || isIphone)){
+            $(".activityvideo").prop("muted","true");
+        }
     }
     return {
         Get: function () {
@@ -382,11 +385,13 @@ var _Navigator = (function () {
                         if ($(".activityimg").length > 0) {
                             $('.activityimg').load(function () {
                                 OnPageLoad();
-                                debugger
                                 if (_currentPageObject.pageId == "p2") {
                                     $("#titleheader").focus();
                                 }
                                 else if ((isIphone || isAndroid) && _NData[_currentPageId].isLoaded != undefined && _NData[_currentPageId].isLoaded == true) {//iphone android on previous focus is set to header
+                                    $("h2").focus();
+                                }
+                                else if(_currentPageId == quizpageid){
                                     $("h2").focus();
                                 }
                                 else {
@@ -399,6 +404,13 @@ var _Navigator = (function () {
                                         $("#progressdiv").focus();
                                     }
                                     // setReader("progressdiv");
+                                }
+                                if(isIphone){
+                                    $("#p17val1").css({"width":"150px", "left": "283px"});
+                                }
+                                if(isIphone && _currentPageId == "p17"){
+                                    $.mobile.zoom.disable();
+                                    $('#p17val1').textinput({preventFocusZoom:false});
                                 }
                                 _NData[_currentPageObject.pageId].isLoaded = true;
                                 if (_Navigator.IsPresenterMode() && (_currentPageObject.pageId != quizpageid || !_currentPageObject.hasVideo)) {
@@ -416,12 +428,18 @@ var _Navigator = (function () {
                             _Assessment.ShowQuestion();
                         }
                         if (_Navigator.GetCurrentPage().hasVideo && !_Navigator.IsAnswered()) {
-                            $('html,body').animate({ scrollTop: document.body.scrollHeight }, 1000, function () {
+                            window.scrollTo(0, document.body.scrollHeight);
+                            if (isChrome && !isAndroid) {
                                 $("h2").focus();
-                            });
+                            }
+                            else {
+                                $("#progressdiv").focus();
+                            }
                         }
-                        if(_Navigator.GetCurrentPage().hasVideo && _Navigator.GetCurrentPage().isLoaded){
-                            $("h2").focus();
+                        if(_currentPageId == "p4" || _currentPageId == "p8" || _currentPageId == "15"){
+                            if(isIphone){
+                                $("h1").focus();
+                            }
                         }
                         if (_Navigator.GetCurrentPage().hasVideo && _Navigator.IsPresenterMode()) {
                             _Navigator.SetPageStatus(true);

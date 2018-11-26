@@ -98,7 +98,12 @@ var _Assessment = (function () {
 				$("#QuetionText").attr("aria-hidden", "true");
 				$("#QuetionText").closest(".questioninnerwrapper").attr("aria-label", "question number " + (currentQuestionIndex + 1) + ") " + currQustion.QuestionText);
 			}
-			$(".intro-content-question").fadeIn(600)
+			if(gRecordData.Status == "Completed"){
+				$(".intro-content-question").show();
+			}
+			else{
+				$(".intro-content-question").fadeIn(600);
+			}
 
 			$("#Questioninfo").focus();
 			if (gRecordData.Status != "Completed") {
@@ -182,6 +187,7 @@ var _Assessment = (function () {
 			$("#linknext").k_enable();
 		},
 		ShowSummary: function () {
+			$(".intro-content-question").hide();
 			var score = 0;
 			for (var b = 0; b < gRecordData.Questions.length; b++) {
 				questionObj = $("#Question").clone();

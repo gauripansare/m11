@@ -427,6 +427,9 @@ var _Navigator = (function () {
                         {
                             _Assessment.ShowQuestion();
                         }
+                        if(_Navigator.GetCurrentPage().hasVideo){
+                            $(".activity").css("height", "auto");
+                        }
                         if (_Navigator.GetCurrentPage().hasVideo && !_Navigator.IsAnswered()) {
                             window.scrollTo(0, document.body.scrollHeight);
                             if (isChrome && !isAndroid) {
@@ -499,7 +502,7 @@ var _Navigator = (function () {
                 LifeCycleEvents.OnInteraction("Previous link click.")
             }
             if (_currentPageObject.pageId == quizpageid && typeof (currentQuestionIndex) != 'undefined' && currentQuestionIndex > 0) {
-                $("#ReviewIns").hide();
+                //$("#ReviewIns").hide();
                 $(".intro-content-question").show();
                 $("#Questioninfo").show();
                 currentQuestionIndex = currentQuestionIndex - 1;

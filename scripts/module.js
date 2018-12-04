@@ -26,6 +26,8 @@ jQuery.fn.extend({
     k_disable: function () {
         this.addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
         if (isIE11version) {
+            if ($(this).attr("type") != undefined && $(this).attr("type") == "radio")
+                return;
             $(this).removeAttr("disabled")
         }
         return;
@@ -562,10 +564,9 @@ var _ModuleCommon = (function () {
             if (pageData.ImageHotSpots != undefined) {
                 for (var i = 0; i < pageData.ImageHotSpots.Hotspots.length; i++) {
                     if (pageData.ImageHotSpots.Hotspots[i].HotspotId == _hotspot.attr("hsid")) {
-                        //if (pageData.ImageHotSpots.Hotspots[i].score != undefined && pageData.ImageHotSpots.Hotspots[i].score != "") {
-                        //score = parseInt(pageData.ImageHotSpots.Hotspots[i].score);
+                        
                         nextpgid = pageData.ImageHotSpots.Hotspots[i].nextPageId;
-                        //}
+                       
                         if (pageData.ImageHotSpots.Hotspots[i].correct != undefined) {
                             isCorrect = pageData.ImageHotSpots.Hotspots[i].correct;
                         }
@@ -795,11 +796,18 @@ var _ModuleCommon = (function () {
                 $("#linknext").k_enable();
             }
         },
+        AppendScormReviewFooter: function () {
+            if ($(".ScormReviewFooter").length == 0) {
+                var str = '<div class="ScormReviewFooter"> Review Mode</div>';
+                $("footer").append($(str));
+                $("footer").show();
+                $("#linknext").k_enable();
+            }
+        },
     }
 })();
 
-$(document).ready(function () {
-
+$(document).ready(function () {    
     _Navigator.Initialize();
     $('body').attr({ "id": "thebody", "onmousedown": "document.getElementById('thebody').classList.add('no-focus');", "onkeydown": "document.getElementById('thebody').classList.remove('no-focus');" })
 });

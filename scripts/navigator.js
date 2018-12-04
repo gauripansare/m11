@@ -3,7 +3,8 @@
 //This api will contain navigation logic and page load.
 //It will also handle the question navigation if the page is having multiple questions.
 var _Navigator = (function () {
-    var packageType = "";//presenter/scorm/revel
+    var packageType = "scorm";//presenter/scorm/revel
+    var isReviewMode = false;
     var _currentPageId = "";
     var _currentPageObject = {};
     var progressLevels = [26];
@@ -312,6 +313,10 @@ var _Navigator = (function () {
         if(Macos != -1 && isSafari && _currentPageObject.pageId == "p3" && !(isIpad || isIphone)){
             $(".activityvideo").prop("muted","true");
         }
+         if (_Navigator.IsReviewMode()) {
+            $("#linknext").k_enable();
+            $(".start-btn").k_disable();
+        }
     }
     return {
         Get: function () {
@@ -323,6 +328,11 @@ var _Navigator = (function () {
             if (this.IsPresenterMode()) {
                 _ModuleCommon.AppendFooter();
             }
+            if(this.IsReviewMode()){
+                _ModuleCommon.AppendScormReviewFooter();
+                _Assessment.SetCurrentQuestionIndex(0);
+            }
+            
         },
 
         LoadPage: function (pageId, jsonObj) {
@@ -348,6 +358,10 @@ var _Navigator = (function () {
                 $("#linknext").k_enable();
                 $("footer").hide();
                 $("#header-progress").hide();
+                if(this.IsReviewMode()){
+                    _ModuleCommon.AppendScormReviewFooter();
+                    _Assessment.SetCurrentQuestionIndex(0)
+                }
                 if (this.IsPresenterMode())
                     _ModuleCommon.AppendFooter();
 
@@ -472,6 +486,7 @@ var _Navigator = (function () {
                             //$(".hintlink").hide();
                             $("div#hintdiv").hide();
                         }
+                        _NData[_currentPageObject.pageId].isLoaded = true;
                         _Navigator.GetBookmarkData();
                     });
                 })
@@ -481,21 +496,6 @@ var _Navigator = (function () {
                 LifeCycleEvents.OnLoadFromPlayer()
             }
 
-        },
-        LoadDefaultQuestion: function () {
-            if (_currentPageObject.questions.length > 0) {
-                _questionId = 0;
-                _currentPageObject.questions[0].isQuestionVisit = true;
-                for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                    if (_currentPageObject.questions[i].isCurrent) {
-                        _questionId = i;
-                    }
-                }
-                //second parameter is to disable question effect.
-                _Question.Load(_currentPageObject.questions[_questionId], {
-                    disableEffect: true
-                });
-            }
         },
         Prev: function () {
             if (_Navigator.IsRevel()) {
@@ -614,6 +614,12 @@ var _Navigator = (function () {
                 this.UpdateScore();
             }
         },
+        IsReviewMode: function(){
+            return isReviewMode;
+        },
+        SetIsReviewMode: function(isReviewModeStatus){
+            isReviewMode = isReviewModeStatus;
+        },
         SetPageStatus: function (isAnswered) {
             if (isAnswered) {
                 _NData[_currentPageObject.pageId].isAnswered = true;
@@ -654,11 +660,11 @@ var _Navigator = (function () {
         SetNextPageId: function (nextpageid) {
             if (nextpageid == "p12") {
                 _NData[_currentPageObject.nextPageId].prevPageId = "p13";
-                progressLevels[0] = progressLevels[0] + 2;//increase num of pages by 1 
+                progressLevels[0] = progressLevels[0] + 2;//increase num of pages by 2
             }
             else if (nextpageid == "p2m1") {
                 _NData[_currentPageObject.nextPageId].prevPageId = "p2m2";
-                progressLevels[0] = progressLevels[0] + 2;//increase num of pages by 1 
+                progressLevels[0] = progressLevels[0] + 2;//increase num of pages by 2 
             }
             else {
                 _NData[_currentPageObject.nextPageId].prevPageId = nextpageid;
@@ -669,7 +675,7 @@ var _Navigator = (function () {
 
         },
         GetBookmarkData: function () {
-            if (!this.IsScorm() && !this.IsRevel())
+            if (!this.IsScorm() && !this.IsRevel() && !this.IsReviewMode())
                 return;
             var bookmarkobj = {}
             bookmarkobj.BMPageId = bookmarkpageid;
@@ -705,9 +711,11 @@ var _Navigator = (function () {
         SetNavigatorBMData: function (gVisistedPages) {
             for (var i = 0; i < gVisistedPages.length; i++) {
                 if (_NData[gVisistedPages[i].id].hasVideo) {
-                    if (_NData[gVisistedPages[i].id].played != undefined && _NData[gVisistedPages[i].id].played)
-                        _NData[gVisistedPages[i].id].isAnswered = gVisistedPages[i].played;
-                    _NData[gVisistedPages[i].id].played = gVisistedPages[i].played;
+                    if (gVisistedPages[i].played != undefined && gVisistedPages[i].played)
+                    {
+                        _NData[gVisistedPages[i].id].isAnswered = true;
+                        _NData[gVisistedPages[i].id].played = gVisistedPages[i].played;
+                    }
                 }
                 else {
                     _NData[gVisistedPages[i].id].isAnswered = true;
@@ -752,6 +760,9 @@ var _Navigator = (function () {
                 _ScormUtility.Init();
                 _Navigator.SetBookmarkData();
                 //bookmarkpageid = _ScormUtility.GetBookMark();
+                if(_ScormUtility.IsScormReviewMode()){
+                    _Navigator.SetIsReviewMode(true);
+                }
                 this.GotoBookmarkPage();
             }
             else if (packageType == "revel") {

@@ -389,7 +389,7 @@ $(document).on("mousemove", ".imgSliderHover", function (e) {
     if (isAndroid || isIphone)
         return;
     var cursorX = e.pageX - this.offsetLeft;
-    console.log(cursorX + ":: X ::");
+   // console.log(cursorX + ":: X ::");
     var imagerightPosition = Number($(".imgAnimate").css('right').replace("px", ""));
     if (cursorX >= 179 && cursorX <= 575) {
         if (imagerightPosition == -400) {
@@ -407,7 +407,7 @@ $(document).on("mousemove", ".imgAnimate", function (e) {
     if (isAndroid || isIphone)
         return;
     var cursorXX = e.pageX - this.offsetLeft;
-    console.log(cursorXX + ":: XX ::");
+    //console.log(cursorXX + ":: XX ::");
     var imagerightPosition = Number($(".imgAnimate").css('right').replace("px", ""));
     if (cursorXX >= 340 && cursorXX <= 575) {
         if (imagerightPosition == -400) {

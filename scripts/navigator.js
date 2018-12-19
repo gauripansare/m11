@@ -3,7 +3,7 @@
 //This api will contain navigation logic and page load.
 //It will also handle the question navigation if the page is having multiple questions.
 var _Navigator = (function () {
-    var packageType = "presenter";//presenter/scorm/revel
+    var packageType = "";//presenter/scorm/revel
     var isReviewMode = false;
     var _currentPageId = "";
     var _currentPageObject = {};
@@ -307,6 +307,11 @@ var _Navigator = (function () {
             $("#linknext").k_enable();
             $(".start-btn").k_disable();
         }
+if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
+            if(isIphone || isAndroid){
+                $("#header-progress .presentationModeFooter").hide();                        
+            }
+        }
         if ((_currentPageObject.pageId == "p3" || _currentPageObject.pageId == "p7" || _currentPageObject.pageId == "p14" || _currentPageObject.pageId == "p25") && (isIpad || isIphone || isSafari)) {
             $(".activityvideo").attr("controls", "true");
         }
@@ -396,7 +401,11 @@ var _Navigator = (function () {
                         $("footer").show();
                         $("#linknext").k_enable();
                     }
-                  
+                    if (_Navigator.IsReviewMode()) {
+                        $(".wrapper-img").prepend('<div class="presentationModeFooter" >Review Mode</div>')
+                        $("footer").show();
+                        $("#linknext").k_enable();
+                    }
                 });
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {

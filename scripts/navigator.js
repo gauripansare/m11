@@ -3,7 +3,7 @@
 //This api will contain navigation logic and page load.
 //It will also handle the question navigation if the page is having multiple questions.
 var _Navigator = (function () {
-    var packageType = "scorm";//presenter/scorm/revel
+    var packageType = "";//presenter/scorm/revel
     var isReviewMode = false;
     var _currentPageId = "";
     var _currentPageObject = {};
@@ -308,18 +308,23 @@ var _Navigator = (function () {
             $("#linknext").k_enable();
             $(".start-btn").k_disable();
         }
-if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
-            if(isIphone || isAndroid){
-                $("#header-progress .presentationModeFooter").hide();                        
+        if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
+            if (isIphone || isAndroid) {
+                $("#header-progress .presentationModeFooter").hide();
             }
         }
         if ((_currentPageObject.pageId == "p3" || _currentPageObject.pageId == "p7" || _currentPageObject.pageId == "p14" || _currentPageObject.pageId == "p25") && (isIpad || isIphone || isSafari)) {
             $(".activityvideo").attr("controls", "true");
         }
-        if(Macos != -1 && isSafari && _currentPageObject.pageId == "p3" && !(isIpad || isIphone)){
-            $(".activityvideo").prop("muted","true");
+        if (_currentPageObject.pageId == "p3" || _currentPageObject.pageId == "p7" || _currentPageObject.pageId == "p14" || _currentPageObject.pageId == "p25") {
+            setTimeout(function () {
+                 $('.activityvideo').get(0).play();
+            }, 50)
         }
-         if (_Navigator.IsReviewMode()) {
+        if (Macos != -1 && isSafari && _currentPageObject.pageId == "p3" && !(isIpad || isIphone)) {
+            $(".activityvideo").prop("muted", "true");
+        }
+        if (_Navigator.IsReviewMode()) {
             $("#linknext").k_enable();
             $(".start-btn").k_disable();
         }
@@ -334,16 +339,16 @@ if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
             if (this.IsPresenterMode()) {
                 _ModuleCommon.AppendFooter();
             }
-            if(this.IsReviewMode()){
+            if (this.IsReviewMode()) {
                 _ModuleCommon.AppendScormReviewFooter();
                 _Assessment.SetCurrentQuestionIndex(0);
             }
-            
+
         },
 
         LoadPage: function (pageId, jsonObj) {
             $(".hintcontainer").hide();
-             $(".header-content-dock").css({"visibility":"hidden"});
+            $(".header-content-dock").css({ "visibility": "hidden" });
             if (_Navigator.IsRevel() && _currentPageId != undefined && _currentPageId != "") {
                 LifeCycleEvents.OnUnloadFromPlayer()
             }
@@ -364,7 +369,7 @@ if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
                 $("#linknext").k_enable();
                 $("footer").hide();
                 $("#header-progress").hide();
-                if(this.IsReviewMode()){
+                if (this.IsReviewMode()) {
                     _ModuleCommon.AppendScormReviewFooter();
                     _Assessment.SetCurrentQuestionIndex(0)
                 }
@@ -422,7 +427,7 @@ if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
                                 else if ((isIphone || isAndroid) && _NData[_currentPageId].isLoaded != undefined && _NData[_currentPageId].isLoaded == true) {//iphone android on previous focus is set to header
                                     $("h2").focus();
                                 }
-                                else if(_currentPageId == quizpageid){
+                                else if (_currentPageId == quizpageid) {
                                     $("h2").focus();
                                 }
                                 else {
@@ -436,12 +441,12 @@ if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
                                     }
                                     // setReader("progressdiv");
                                 }
-                                if(isIphone){
-                                    $("#p17val1").css({"width":"150px", "left": "283px"});
+                                if (isIphone) {
+                                    $("#p17val1").css({ "width": "150px", "left": "283px" });
                                 }
-                                if(isIphone && _currentPageId == "p17"){
+                                if (isIphone && _currentPageId == "p17") {
                                     $.mobile.zoom.disable();
-                                    $('#p17val1').textinput({preventFocusZoom:false});
+                                    $('#p17val1').textinput({ preventFocusZoom: false });
                                 }
                                 _NData[_currentPageObject.pageId].isLoaded = true;
                                 if (_Navigator.IsPresenterMode() && (_currentPageObject.pageId != quizpageid || !_currentPageObject.hasVideo)) {
@@ -483,7 +488,7 @@ if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
                                 $("h2").focus();
                             }
                         }
-                        if(_Navigator.GetCurrentPage().hasVideo){
+                        if (_Navigator.GetCurrentPage().hasVideo) {
                             $(".activity").css("height", "auto");
                         }
                         if (_Navigator.GetCurrentPage().hasVideo && !_Navigator.IsAnswered()) {
@@ -495,8 +500,8 @@ if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
                                 $("#progressdiv").focus();
                             }
                         }
-                        if(_currentPageId == "p4" || _currentPageId == "p8" || _currentPageId == "15"){
-                            if(isIphone){
+                        if (_currentPageId == "p4" || _currentPageId == "p8" || _currentPageId == "15") {
+                            if (isIphone) {
                                 $("h1").focus();
                             }
                         }
@@ -539,7 +544,7 @@ if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
             }
 
         },
-GetSummarybookmark: function () {
+        GetSummarybookmark: function () {
             return Summarybookmark;
         },
         Prev: function () {
@@ -591,7 +596,7 @@ GetSummarybookmark: function () {
                     $("#Summary").show();
                     $("#Questioninfo").hide();
                     $("#Summary").load("pagedata/Summary.htm", function () {
-  Summarybookmark = true;
+                        Summarybookmark = true;
                         _Navigator.GetBookmarkData();
                         _Assessment.ShowSummary()
                         $("#linkprevious").k_enable();
@@ -663,10 +668,10 @@ GetSummarybookmark: function () {
                 this.UpdateScore();
             }
         },
-        IsReviewMode: function(){
+        IsReviewMode: function () {
             return isReviewMode;
         },
-        SetIsReviewMode: function(isReviewModeStatus){
+        SetIsReviewMode: function (isReviewModeStatus) {
             isReviewMode = isReviewModeStatus;
         },
         SetPageStatus: function (isAnswered) {
@@ -761,8 +766,7 @@ GetSummarybookmark: function () {
         SetNavigatorBMData: function (gVisistedPages) {
             for (var i = 0; i < gVisistedPages.length; i++) {
                 if (_NData[gVisistedPages[i].id].hasVideo) {
-                    if (gVisistedPages[i].played != undefined && gVisistedPages[i].played)
-                    {
+                    if (gVisistedPages[i].played != undefined && gVisistedPages[i].played) {
                         _NData[gVisistedPages[i].id].isAnswered = true;
                         _NData[gVisistedPages[i].id].played = gVisistedPages[i].played;
                     }
@@ -775,7 +779,7 @@ GetSummarybookmark: function () {
             }
         },
         SetBookMarkPage: function () {
-            if(this.IsReviewMode()){
+            if (this.IsReviewMode()) {
                 return;
             }
             if (!this.IsScorm() && !this.IsRevel())
@@ -814,7 +818,7 @@ GetSummarybookmark: function () {
                 _ScormUtility.Init();
                 _Navigator.SetBookmarkData();
                 //bookmarkpageid = _ScormUtility.GetBookMark();
-                if(_ScormUtility.IsScormReviewMode()){
+                if (_ScormUtility.IsScormReviewMode()) {
                     _Navigator.SetIsReviewMode(true);
                 }
                 this.GotoBookmarkPage();
@@ -882,13 +886,13 @@ GetSummarybookmark: function () {
         GetPackageType: function () {
             return packageType;
         },
-        GetQuizPageId:function(){
+        GetQuizPageId: function () {
             return quizpageid;
         }
     };
 })();
 
-    
+
 
 function setReader(idToStartReading) {
     $('#hiddenAnchor').attr("href", "#" + idToStartReading)

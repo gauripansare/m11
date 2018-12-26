@@ -305,6 +305,12 @@ var _Navigator = (function () {
         }
         _ModuleCommon.OnPageLoad();
         if (_Navigator.IsPresenterMode()) {
+            _ModuleCommon.AppendFooter();
+        }
+        if (_Navigator.IsReviewMode()) {
+            currentQuestionIndex = 0;
+            $(".divHotSpotCommon").k_disable();
+            $("input[type='text']").k_disable();
             $("#linknext").k_enable();
             $(".start-btn").k_disable();
         }
@@ -581,7 +587,7 @@ var _Navigator = (function () {
                     _Assessment.ShowQuestion()
 
                     //this.UpdateProgressBar();
-                    if (gRecordData.Status != "Completed" && !this.IsPresenterMode()) {
+                    if (gRecordData.Status != "Completed" && !this.IsPresenterMode() && !this.IsReviewMode()) {
                         $("#linknext").k_disable();
                         $("#linkprevious").k_disable();
                     }

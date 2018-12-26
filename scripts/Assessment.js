@@ -109,8 +109,7 @@ var _Assessment = (function () {
 			else{
 				$(".intro-content-question").fadeIn(600);
 			}
-
-			
+			$("#Questioninfo").focus();
 			if (gRecordData.Status != "Completed") {
 				$("#linknext").k_disable();
 				if (currentQuestionIndex != 0) {
@@ -121,15 +120,22 @@ var _Assessment = (function () {
 				this.ShowQuestionPresenterMode();
 				$("#linknext").k_enable()
 			}
-			if (gRecordData.Status == "Completed") {
+			if (gRecordData.Status == "Completed" || gRecordData.Questions[currentQuestionIndex].IsAnswered) {
 				this.ShowUserReviewMode();
+			}
+			/*
+			if (gRecordData.Questions[currentQuestionIndex].IsAnswered) {
+				this.ShowUserReviewMode();
+			}*/
+			if (_Navigator.IsReviewMode()) {
+				$("input[type='radio']").prop("readonly", "readonly");
+				$("input[type='radio']").k_disable();
+				$("#linkprevious").k_enable()
+				$("#linknext").k_enable()
 			}
 			_Navigator.UpdateProgressBar();
 			$(".assessmentSubmit").k_disable();
 			_Navigator.GetBookmarkData();
-			
-			$("#Questioninfo").focus();
-			
 		},
 		ShowQuestionPresenterMode: function () {
 			var currQuestion = gRecordData.Questions[currentQuestionIndex];
@@ -216,6 +222,7 @@ var _Assessment = (function () {
 					optionObj.find("input").attr("name", radioname)
 					optionObj.show();
 					//questionObj.find(".question-band").append(optionObj)
+					if (gRecordData.Questions[b].IsAnswered) { //ATUL 
 					if (isIE11version || isIEEdge || isSafari) {
 						optionObj.find("input").attr("aria-label", optionObj.find(".inpputtext").text());
 						optionObj.find(".inpputtext").attr("aria-hidden", "true")
@@ -252,6 +259,7 @@ var _Assessment = (function () {
 
 					}
 					iscorrectimg.attr({ "alt": "", "aria-hidden": "true" });
+					}
 					questionObj.find(".question-band").append(optionObj)
 
 				}
@@ -288,7 +296,7 @@ var _Assessment = (function () {
 			}
 			var perscore = gRecordData.Score / parseInt(gRecordData.AssessmentScore) * 100;
 			$("#ScoreSummary").text("Score: " + perscore + "%");
-			if (gRecordData.Status == "Started") {
+			if (gRecordData.Status == "Started" && !_Navigator.IsReviewMode()) {
 				gRecordData.Status = "Completed";
 				gRecordData.Score = score;
 
@@ -356,6 +364,9 @@ var _Assessment = (function () {
 			currentQuestionIndex = assessmentobj.currentQuestionIndex;
 			gRecordData.Status = assessmentobj.status;
 			gRecordData.Score = assessmentobj.score;
+			if (assessmentobj.Qdata.length == gRecordData.Questions.length) {
+				gRecordData.Status = "Completed";
+			}
 			if (assessmentobj.Qdata != undefined && assessmentobj.Qdata.length > 0) {
 				for (var i = 0; i < gRecordData.Questions.length; i++) {
 					for (j = 0; j < assessmentobj.Qdata.length; j++) {

@@ -71,9 +71,6 @@ var _ModuleCommon = (function () {
         },
 
         ShowFeedbackReviewMode: function () {
-            if (_Navigator.IsPresenterMode()) {
-                return;
-            }
             var pageData = this.GetPageDetailData();
             var fdkurl = "";
             if (pageData != undefined) {
@@ -483,6 +480,7 @@ var _ModuleCommon = (function () {
         },
 
         PresenterMode: function () {
+            /*
             var currentPageData = _Navigator.GetCurrentPage();
             var pageData = this.GetPageDetailData();
             var appendImage = $(".wrapperimage");
@@ -530,9 +528,10 @@ var _ModuleCommon = (function () {
                     }
                 }
             }
-            $("#linknext").k_enable();
+            
             _Navigator.SetPageStatus(true);
-            _Navigator.UpdateProgressBar();
+            _Navigator.UpdateProgressBar();*/
+            $("#linknext").k_enable();
         },
 
         ApplycontainerWidth: function () {
@@ -617,9 +616,6 @@ var _ModuleCommon = (function () {
         },
 
         InputFeedback: function () {
-            if (_Navigator.IsPresenterMode()) {
-                return;
-            }
             if (_Navigator.IsRevel()) {
                 LifeCycleEvents.OnFeedback()
             }
@@ -773,7 +769,6 @@ var _ModuleCommon = (function () {
 
             _Navigator.GetBookmarkData();
         },
-
         videoStart: function () {
             if (!_Navigator.IsAnswered()) {
                 $('html,body').animate({ scrollTop: document.body.scrollHeight }, 1000, function () { });

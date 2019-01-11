@@ -299,7 +299,7 @@ var _Assessment = (function () {
 				this.SetScore(perscore);
 			}
 			if (_Navigator.IsPresenterMode()) {
-				$("#ScoreSummary").text("Score: 100%");
+				//$("#ScoreSummary").text("Score: 100%");
 				gRecordData.Status = "Completed";
 			}
 			_Navigator.UpdateProgressBar();

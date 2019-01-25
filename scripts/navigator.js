@@ -5,7 +5,7 @@
 var autoplayInterval = undefined;
 var videoDiv = $("#activityvideo");
 var _Navigator = (function () {
-    var packageType = "presenter";//presenter/scorm/revel 
+    var packageType = "";//presenter/scorm/revel 
     var isReviewMode = false;
     var _currentPageId = "";
     var _currentPageObject = {};
@@ -32,7 +32,7 @@ var _Navigator = (function () {
             hinturl: "hintp2.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player",
+            accessText: "Music library with music list displayed column album artist, count, length, rating",
         },
         "p2m1": {
             pageId: "p2m1",
@@ -42,7 +42,7 @@ var _Navigator = (function () {
             hinturl: "hintp2m1.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player Organize Context menu open",
+            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Organize Context menu open",
         },
         "p2m2": {
             pageId: "p2m2",
@@ -52,7 +52,7 @@ var _Navigator = (function () {
             hinturl: "hintp2m2.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player Organize menu submenu Sort by open",
+            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Organize menu submenu Sort by open",
         },
 
         "p3": {
@@ -71,7 +71,7 @@ var _Navigator = (function () {
             hinturl: "hintp4.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player",
+            accessText: "Music library with music list displayed column album artist, count, length, rating.",
         },
         "p5": {//optional
             pageId: "p5",
@@ -81,7 +81,7 @@ var _Navigator = (function () {
             hinturl: "hintp5.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player Music Context menu open",
+            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Music Context menu open",
         },
         "p6": {
             pageId: "p6",
@@ -91,7 +91,7 @@ var _Navigator = (function () {
             hinturl: "hintp6.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player",
+            accessText: "Music library with music list displayed column album artist, count, length, rating.",
         },
         "p7": {
             pageId: "p7",
@@ -109,7 +109,7 @@ var _Navigator = (function () {
             hinturl: "hintp8.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player Music Context menu open",
+            accessText: "Music library with music list displayed column album artist, count, length, rating.Windows Media Player Music Context menu open",
         },
         "p9": {//optional
             pageId: "p9",
@@ -119,7 +119,7 @@ var _Navigator = (function () {
             hinturl: "hintp9.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player Genre Context menu open",
+            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Genre Context menu open",
         },
         "p10": {
             pageId: "p10",
@@ -129,7 +129,7 @@ var _Navigator = (function () {
             hinturl: "hintp10.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player",
+            accessText: "Music library with music list displayed column album artist, count, length, rating",
         },
         "p11": {
             pageId: "p11",
@@ -139,7 +139,7 @@ var _Navigator = (function () {
             hinturl: "hintp11.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player",
+            accessText: "Music library with music list displayed column album artist, count, length, rating",
         },
         "p12": {//optional
             pageId: "p12",
@@ -149,7 +149,7 @@ var _Navigator = (function () {
             hinturl: "hintp12.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player Organize Context menu open",
+            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Organize Context menu open",
         },
         "p13": {//optional
             pageId: "p13",
@@ -159,7 +159,7 @@ var _Navigator = (function () {
             hinturl: "hintp13.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player Organize menu submenu Sort by open",
+            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Organize menu submenu Sort by open",
         },
         "p14": {
             pageId: "p14",
@@ -177,7 +177,7 @@ var _Navigator = (function () {
             hinturl: "hintp15.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player",
+            accessText: "Music library with music list displayed column album artist, count, length, rating",
         },
         "p16": {
             pageId: "p16",
@@ -187,7 +187,7 @@ var _Navigator = (function () {
             hinturl: "hintp16.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Windows Media Player Create playlist menu open",
+            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Create playlist menu open",
         },
         "p17": {
             pageId: "p17",
@@ -289,8 +289,7 @@ var _Navigator = (function () {
             hideHint: true
         }
     }
-    var _StateData = {}
-
+    var _StateData = {}    
     function OnPageLoad() {
 
         $(".hintcontainer").hide()
@@ -314,7 +313,7 @@ var _Navigator = (function () {
             $(".divHotSpotCommon").k_disable();
             $("input[type='text']").k_disable();
             $("#linknext").k_enable();
-            $(".start-btn").k_disable();
+            $(".start-btn").link_k_disable();
         }
         if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
             if (isIphone || isAndroid) {
@@ -478,7 +477,7 @@ var _Navigator = (function () {
                             $("#Summary").load("pagedata/Summary.htm", function () {
                                 _Assessment.ShowSummary();
                                 if (isChrome && !isAndroid) {
-                                    $("h2.pageheading").attr("tabindex", "0");
+                                    $("h2.pageheading").attr("tabindex", "-1");
                                     $("h2").focus();
                                 }
                                 else {
@@ -492,7 +491,7 @@ var _Navigator = (function () {
                         }
                         else {
                             _Assessment.ShowQuestion();
-                            $("h2.pageheading").attr("tabindex", "0");
+                            $("h2.pageheading").attr("tabindex", "-1");
                             $("h2").focus();
                         }
                     }
@@ -954,9 +953,9 @@ function AutoPlayVideo()
         $('#activityvideo').get(0).play();
         clearInterval(autoplayInterval);
         autoplayInterval = null;
-        console.log("atul - Inside try");
+        //console.log("atul - Inside try");
       }
       catch(err) {
-        console.log("atul - Inside error");
+        //console.log("atul - Inside error");
       }
 }

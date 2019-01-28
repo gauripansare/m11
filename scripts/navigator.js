@@ -313,7 +313,7 @@ var _Navigator = (function () {
             $(".divHotSpotCommon").k_disable();
             $("input[type='text']").k_disable();
             $("#linknext").k_enable();
-            $(".start-btn").link_k_disable();
+            $("#start").link_k_disable();
         }
         if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
             if (isIphone || isAndroid) {
@@ -333,7 +333,7 @@ var _Navigator = (function () {
     }
     if (_Navigator.IsReviewMode()) {
         $("#linknext").k_enable();
-        $(".start-btn").k_disable();
+        $("#start").link_k_disable();
     }
 }
     return {

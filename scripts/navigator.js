@@ -42,7 +42,7 @@ var _Navigator = (function () {
             hinturl: "hintp2m1.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Organize Context menu open",
+            accessText: "Music library window with Organize menu window open and with links to Manage libraries, Sort by, Layout. ",
         },
         "p2m2": {
             pageId: "p2m2",
@@ -52,7 +52,7 @@ var _Navigator = (function () {
             hinturl: "hintp2m2.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Organize menu submenu Sort by open",
+            accessText: "Music library window with Organize menu window open and Sort by child window expanded with items Title, Album artist, Album and other.",
         },
 
         "p3": {
@@ -71,7 +71,7 @@ var _Navigator = (function () {
             hinturl: "hintp4.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating.",
+            accessText: "Music library with music list displayed column album artist, count, length, rating and Music tree view in left with Artist, Album and Genre links.",
         },
         "p5": {//optional
             pageId: "p5",
@@ -81,7 +81,7 @@ var _Navigator = (function () {
             hinturl: "hintp5.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Music Context menu open",
+            accessText: "Music library with music child menu expanded displaying items Artist, Album, All Music, Genre, and other.",
         },
         "p6": {
             pageId: "p6",
@@ -91,7 +91,7 @@ var _Navigator = (function () {
             hinturl: "hintp6.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating.",
+            accessText: "Music library with Genre music list displayed with items Beats, Blues, Chiptue, Classical, Club Music, Comedy and Country.",
         },
         "p7": {
             pageId: "p7",
@@ -109,7 +109,7 @@ var _Navigator = (function () {
             hinturl: "hintp8.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating.Windows Media Player Music Context menu open",
+            accessText: "Music library with country genre music list displayed and Menu bar at top with items Library, Music, Genre, and Country.",
         },
         "p9": {//optional
             pageId: "p9",
@@ -119,7 +119,7 @@ var _Navigator = (function () {
             hinturl: "hintp9.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Genre Context menu open",
+            accessText: "Music library with Genre in menu bar expanded displaying items Alternative, Country, Pop and Soundtrack.",
         },
         "p10": {
             pageId: "p10",
@@ -129,7 +129,7 @@ var _Navigator = (function () {
             hinturl: "hintp10.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating",
+            accessText: "Music library with Genre music list displayed with items Podcast, Pop, R&B/Soul, Rap & Hip Hop, Religion, Rock, and Rock/Pop.",
         },
         "p11": {
             pageId: "p11",
@@ -139,7 +139,7 @@ var _Navigator = (function () {
             hinturl: "hintp11.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating",
+            accessText: "Music library with Pop genre music list displayed with column Title, Length, Rating, Album, and Genre.",
         },
         "p12": {//optional
             pageId: "p12",
@@ -149,7 +149,7 @@ var _Navigator = (function () {
             hinturl: "hintp12.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Organize Context menu open",
+            accessText: "Music library window with Organize menu window open and with links to Manage libraries, Sort by, Layout. ",
         },
         "p13": {//optional
             pageId: "p13",
@@ -159,7 +159,7 @@ var _Navigator = (function () {
             hinturl: "hintp13.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Organize menu submenu Sort by open",
+            accessText: "Music library window with Organize menu window open and Sort by child window expanded with items Title, Album artist, Album and other. ",
         },
         "p14": {
             pageId: "p14",
@@ -177,7 +177,7 @@ var _Navigator = (function () {
             hinturl: "hintp15.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating",
+            accessText: "Music library with Pop genre music list displayed with menu bar arrow for Organize, Stream, Create Playlist.",
         },
         "p16": {
             pageId: "p16",
@@ -187,7 +187,7 @@ var _Navigator = (function () {
             hinturl: "hintp16.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "Music library with music list displayed column album artist, count, length, rating. Windows Media Player Create playlist menu open",
+            accessText: "Music library with Pop genre music list displayed and Create Playlist child window open with option two Create playlist, Create Auto playlist.",
         },
         "p17": {
             pageId: "p17",
@@ -197,7 +197,7 @@ var _Navigator = (function () {
             hinturl: "hintp17.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "New Auto Playlist dialogue window open",
+            accessText: "New Playlist popup open with edit text to enter Auto playlist name.",
         },
         "p18": {
             pageId: "p18",
@@ -207,7 +207,7 @@ var _Navigator = (function () {
             hinturl: "hintp18.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "New Auto Playlist dialogue window open",
+            accessText: "New Auto Playlist window open with link to add criteria for auto playlist.",
         },
         "p19": {
             pageId: "p19",
@@ -217,7 +217,7 @@ var _Navigator = (function () {
             hinturl: "hintp19.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "New Auto Playlist dialogue window Music in my library combobox open",
+            accessText: "New Auto Playlist window with add criteria menu open with items Bit Rate, Genre and other.",
         },
         "p20": {
             pageId: "p20",
@@ -227,7 +227,7 @@ var _Navigator = (function () {
             hinturl: "hintp20.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "New Auto Playlist dialogue window open",
+            accessText: "New Auto Playlist window with Genre Is criteria added for music in my library option.",
         },
         "p21": {
             pageId: "p21",
@@ -237,7 +237,7 @@ var _Navigator = (function () {
             hinturl: "hintp21.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "New Auto Playlist dialogue window  Criteria Genre combo box open",
+            accessText: "New Auto Playlist window with Genre Is criteria added and Is options expanded and displays options Is, Is Not and Contains.",
         },
         "p22": {
             pageId: "p22",
@@ -247,7 +247,7 @@ var _Navigator = (function () {
             hinturl: "hintp22.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "New Auto Playlist dialogue window open",
+            accessText: "New Auto Playlist window with Genre Contains criteria added with link Click to set displayed.",
         },
         "p23": {
             pageId: "p23",
@@ -257,7 +257,7 @@ var _Navigator = (function () {
             hinturl: "hintp23.htm",
             hasActivity: true,
             hashint: true,
-            accessText: "New Auto Playlist dialogue window  Criteria Genre combo box open",
+            accessText: "New Auto Playlist window with Genre Contains criteria and option dropdown to select item from Alternative, Beats, Country and other.",
         },
         "p24": {
             pageId: "p24",
@@ -267,7 +267,7 @@ var _Navigator = (function () {
             hasActivity: true,
             hinturl: "hintp24.htm",
             hashint: true,
-            accessText: "New Auto Playlist dialogue window open",
+            accessText: "New Auto Playlist window with Genre Contains Country criteria set for Music in my library.",
         },
         "p25": {
             pageId: "p25",

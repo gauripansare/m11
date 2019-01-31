@@ -3,7 +3,7 @@
 //This api will contain navigation logic and page load.
 //It will also handle the question navigation if the page is having multiple questions.
 var autoplayInterval = undefined;
-var videoDiv = $("#activityvideo");
+var videoDiv = $(".activityvideo");
 var _Navigator = (function () {
     var packageType = "";//presenter/scorm/revel 
     var isReviewMode = false;
@@ -60,6 +60,7 @@ var _Navigator = (function () {
             prevPageId: "p2",
             nextPageId: "p4",
             dataurl: "p3.htm",
+            videoURL: "https://pe-xl-prod.knowdl.com/content/itsim/videos/databases/query1-cp7v3-1.mp4",
             hasActivity: true,
             hasVideo: true,
         },
@@ -98,6 +99,7 @@ var _Navigator = (function () {
             prevPageId: "p6",
             nextPageId: "p8",
             dataurl: "p7.htm",
+            videoURL: "https://pe-xl-prod.knowdl.com/content/itsim/videos/databases/query2_cp7v3-1.mp4",
             hasActivity: true,
             hasVideo: true,
         },
@@ -166,6 +168,7 @@ var _Navigator = (function () {
             prevPageId: "p11",
             nextPageId: "p15",
             dataurl: "p14.htm",
+            videoURL: "https://pe-xl-prod.knowdl.com/content/itsim/videos/databases/query3_cp7v3-1.mp4",
             hasActivity: true,
             hasVideo: true,
         },
@@ -274,6 +277,7 @@ var _Navigator = (function () {
             prevPageId: "p24",
             nextPageId: "p26",
             dataurl: "p25.htm",
+            videoURL: "https://pe-xl-prod.knowdl.com/content/itsim/videos/databases/query4_cp7v3-1.mp4",
             hasActivity: true,
             hasVideo: true,
         },
@@ -324,6 +328,7 @@ var _Navigator = (function () {
             $(".activityvideo").attr("controls", "true");
         }  
         if (_currentPageObject.pageId == "p3" || _currentPageObject.pageId == "p7" || _currentPageObject.pageId == "p14" || _currentPageObject.pageId == "p25") {
+            $(".activityvideo source").attr("src", _currentPageObject.videoURL);
             autoplayInterval = setInterval(function(){
                 AutoPlayVideo();
            },1000);        
@@ -950,7 +955,7 @@ function changeCSS(cssFile, cssLinkIndex) {
 function AutoPlayVideo()
 {
     try {
-        $('#activityvideo').get(0).play();
+        $('.activityvideo').get(0).play();
         clearInterval(autoplayInterval);
         autoplayInterval = null;
         //console.log("atul - Inside try");

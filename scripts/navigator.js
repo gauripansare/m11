@@ -5,7 +5,7 @@
 var autoplayInterval = undefined;
 var videoDiv = $(".activityvideo");
 var _Navigator = (function () {
-    var packageType = "";//presenter/scorm/revel 
+    var packageType = "scorm";//presenter/scorm/revel
     var isReviewMode = false;
     var _currentPageId = "";
     var _currentPageObject = {};
@@ -434,6 +434,13 @@ var _Navigator = (function () {
                         $('.activityimg').load(function () {
                             OnPageLoad();
                             if (_currentPageObject.pageId == "p2") {
+                                $("#titleheader").attr({tabindex: "-1", role: "heading"}).focus();
+                            }
+                            else{
+                                $("h2:first").attr({tabindex: "-1", role: "heading"}).focus();
+                            }
+                            /*
+                            if (_currentPageObject.pageId == "p2") {
                                 $("#titleheader").focus();
                             }
                             else if ((isIphone || isAndroid) && _NData[_currentPageId].isLoaded != undefined && _NData[_currentPageId].isLoaded == true) {//iphone android on previous focus is set to header
@@ -452,7 +459,7 @@ var _Navigator = (function () {
                                     $("#progressdiv").focus();
                                 }
                                 // setReader("progressdiv");
-                            }
+                            }*/
                             if (isIphone) {
                                 $("#p17val1").css({ "width": "150px", "left": "283px" });
                             }
@@ -481,13 +488,7 @@ var _Navigator = (function () {
                             $("#Questioninfo").hide();
                             $("#Summary").load("pagedata/Summary.htm", function () {
                                 _Assessment.ShowSummary();
-                                if (isChrome && !isAndroid) {
-                                    $("h2.pageheading").attr("tabindex", "-1");
-                                    $("h2").focus();
-                                }
-                                else {
-                                    $("#progressdiv").focus();
-                                }
+                                $("h2:first").attr({tabindex: "-1", role: "heading"}).focus();
                                 $("#linkprevious").k_enable();
 
                             })
@@ -496,8 +497,7 @@ var _Navigator = (function () {
                         }
                         else {
                             _Assessment.ShowQuestion();
-                            $("h2.pageheading").attr("tabindex", "-1");
-                            $("h2").focus();
+                            $("h2:first").attr({tabindex: "-1", role: "heading"}).focus();
                         }
                     }
                     if (_Navigator.GetCurrentPage().hasVideo) {
@@ -505,18 +505,14 @@ var _Navigator = (function () {
                     }
                     if (_Navigator.GetCurrentPage().hasVideo && !_Navigator.IsAnswered()) {
                         window.scrollTo(0, document.body.scrollHeight);
-                        if (isChrome && !isAndroid) {
-                            $("h2").focus();
-                        }
-                        else {
-                            $("#progressdiv").focus();
-                        }
+                        $("h2:first").attr({tabindex: "-1", role: "heading"}).focus();
                     }
+                    /*
                     if (_currentPageId == "p4" || _currentPageId == "p8" || _currentPageId == "15") {
                         if (isIphone) {
                             $("h1").focus();
                         }
-                    }
+                    }*/
                     /*ATUL
                     if (_Navigator.GetCurrentPage().hasVideo && _Navigator.IsPresenterMode()) {
                         _Navigator.SetPageStatus(true);
